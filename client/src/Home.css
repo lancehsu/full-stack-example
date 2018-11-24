@@ -28,11 +28,11 @@
   }
 }
 */
-.container a {
+.Home .container a {
     color: whitesmoke;
     text-decoration: none;
 }
-.container {
+.Home .container {
     color: whitesmoke;
     font-size: 200%;
     text-align: center;
@@ -41,20 +41,23 @@
     height: 2800px;
     grid-template: repeat(1fr, 4) / 1fr
 }
-.container .item {
+.Home .container .item {
     padding: 30px;
 }
-.container #profile-img {
+.Home .container #profile-img {
     background-image: url('img/profile-image.jpg');
     background-position: center;
     background-size: cover;
 }
-.container #promo {
+.Home .container #promo {
     background-image: url('img/buffet.jpg');
 }
-.container #profile-menu {
+.Home .container #profile-menu {
     background-color: #282c34;
 }
-.container #aboutus {
+.Home .container #menu-title:hover {
+    color: grey;
+}
+.Home .container #aboutus {
     background-color: chocolate;
 }

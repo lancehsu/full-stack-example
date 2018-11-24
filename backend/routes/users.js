@@ -1,6 +1,6 @@
 const express = require('express');
-const User = require('../models/user');
 const passport = require('passport');
+const User = require('../models/user');
 const authenticate = require('../authenticate');
 const cors = require('./cors');
 
@@ -53,13 +53,13 @@ usersRouter.post('/login', cors.corsWithOptions, (req, res, next) => {
     if (err) {
       next(err);
       return;
-    } else if (!user) {
+    }
+    if (!user) {
       res.statusCode = 401;
       res.setHeader('Content-Type', 'application/json');
       res.json({ success: false, status: 'Login Unsuccessful!', err: info });
       return;
     }
-
     req.logIn(user, (error) => {
       if (error) {
         res.statusCode = 401;

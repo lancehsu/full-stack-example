@@ -1,10 +1,47 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Pages.css';
 
 class Staffs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { id:[], names: [], imgs: [], fallbackImg: 'images/empty-staff.jpg' };
+
+  }
+  componentDidMount() {
+    this.getStaffs();
+  }
+  getStaffs = async () => {
+    const response = await fetch('/leaders', { method: 'GET' });
+    const data = await response.json();
+    let names = data.map(e => e.name);
+    let imgs = data.map(e => e.image);
+    let id = data.map(e => e.id);
+    this.setState({ id, names, imgs });
+  }
   render() {
+    const { id, names, imgs, fallbackImg } = this.state;
     return (
-      <h1>Staff</h1>
+      <div class='Menu'>
+        <h1>Staffs</h1>
+        <div class='container'>
+        {names.map((e, i) => {
+
+            return (
+              <div class='item'>
+                <div class='item-img-container'>
+                  <Link to ><img  class='item-img' src={imgs[i]} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' /></Link>
+                </div>
+                <div class='item-name'>{e}</div>
+              </div>
+            );
+          })
+        }
+        </div>
+
+      </div>
     );
   }
 }
+
 export default Staffs;

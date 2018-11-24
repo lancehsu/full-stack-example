@@ -9,10 +9,10 @@ class Home extends Component {
         <div class='container'>
           <div id='profile-img' class='item'></div>
           <div id='promo' class='item'>
-            <h1><Link to='/promotions'>Promotions</Link></h1>
+            <div><h1><Link to='/promotions'>Promotions</Link></h1></div>
           </div>
           <div id='profile-menu' class='item'>
-            <h1><Link to='/menu'>Menu</Link></h1>
+            <div><h1><Link to='/menu' id='menu-title'>Menu</Link></h1></div>
             <div id='scroll-plate'></div>
           </div>
           <div id='aboutus' class='item'>

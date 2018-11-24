@@ -1,0 +1,40 @@
+.Menu {
+    padding: 5px;
+    font-size: 200%;
+    color: whitesmoke;
+    background-color: chocolate;
+    text-align: center;
+}
+.Menu .container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 60%;
+}
+.Menu .item {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.item-img-container {
+    width: 200px;
+    height: 200px;
+}
+.Menu .item-img {
+    width: 200px;
+    height: 200px;
+}
+.item-img-container:hover {
+    filter: brightness(70%);
+}
+.item .item-img-container:hover + .item-name {
+    color: grey;
+}
+.Menu .item-name {
+    margin: auto;
+    padding: 3px;
+    font-size: 70%;
+}

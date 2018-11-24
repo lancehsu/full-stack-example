@@ -17,7 +17,7 @@ const uploadRouter = require('./routes/uploadRouter');
 const favoriteRouter = require('./routes/favoriteRouter');
 
 const app = express();
-
+/*
 app.all('*', (req, res, next) => {
   if (req.secure) {
     next();
@@ -26,7 +26,7 @@ app.all('*', (req, res, next) => {
   res.redirect(307, `https://${req.hostname}:${app.get('secPort')}${req.url}`);
   // "req.url" will contain rest of the url except localhost and port number!
 });
-
+*/
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url, { useNewUrlParser: true });
@@ -36,6 +36,7 @@ connect.then((db) => {
 }, err => console.log(err));
 
 
+// app.enable('etag');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

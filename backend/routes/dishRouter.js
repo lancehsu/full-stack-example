@@ -21,8 +21,8 @@ dishRouter.route('/')
     }
   })
   .post(
-    cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin
-    , async (req, res, next) => {
+    cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin,
+    async (req, res, next) => {
       try {
         const dish = await Dishes.create(req.body);
         res.statusCode = 200;

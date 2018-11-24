@@ -9,7 +9,7 @@ promoRouter.use(express.json());
 
 promoRouter.route('/')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .get(cors.cors, async (req, res, next) => {
+  .get(async (req, res, next) => {
     try {
       const promos = await Promotions.find(req.query);
       res.statusCode = 200;
