@@ -1,0 +1,31 @@
+.Detail {
+    padding: 5px;
+    min-height: 600px;
+    font-size: 200%;
+    color: whitesmoke;
+    background-color: chocolate;
+}
+.profile {
+    display: flex;
+    margin: 30px 100px;
+}
+.info {
+    flex-grow: 2;
+    padding: 0px 50px;
+}
+.name {
+    font-size: 150%;
+    margin-bottom: 30px;
+}
+.description {
+    text-indent: 2em;
+    margin-top: 30px;
+    font-size: 70%;
+}
+.img-container {
+    flex-grow: 1;
+}
+.Detail .img {
+    width: 400px;
+    height: 400px;
+}

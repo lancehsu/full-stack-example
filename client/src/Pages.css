@@ -1,31 +1,35 @@
-.Menu {
+.Menu, .Promotions, .Staffs {
     padding: 5px;
+    min-height: 600px;
     font-size: 200%;
     color: whitesmoke;
     background-color: chocolate;
     text-align: center;
 }
-.Menu .container {
+.Menu .title h1 {
+    margin-bottom: 0px;
+}
+.Menu .title select {
+    margin-bottom: 30px;
+}
+.container {
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     width: 60%;
 }
-.Menu .item {
+ .item {
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
-.item-img-container {
+.item-img-container, .item-img {
     width: 200px;
     height: 200px;
-}
-.Menu .item-img {
-    width: 200px;
-    height: 200px;
+
 }
 .item-img-container:hover {
     filter: brightness(70%);
@@ -33,7 +37,7 @@
 .item .item-img-container:hover + .item-name {
     color: grey;
 }
-.Menu .item-name {
+.item-name {
     margin: auto;
     padding: 3px;
     font-size: 70%;

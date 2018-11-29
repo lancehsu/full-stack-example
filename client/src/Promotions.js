@@ -1,44 +1,45 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Pages.css';
 
 class Promotions extends Component {
   constructor(props) {
     super(props);
-    this.state = { names: [], imgs: [] };
-
+    this.state = { id: [], names: [], imgs: [], fallbackImg: '/images/promotions-icon.jpg' };
   }
   componentDidMount() {
-    this.getMenu();
+    this.getPromos();
   }
-  getMenu = async () => {
+  getPromos = async () => {
     const response = await fetch('/promotions', { method: 'GET' });
     const data = await response.json();
-    let names = data.map(e => e.name);
-    let imgs = data.map(e => e.image);
-    this.setState({ names, imgs });
+    const names = data.map(e => e.name);
+    const imgs = data.map(e => e.image);
+    const id = data.map(e => e._id);
+    this.setState({ id, names, imgs });
   }
   render() {
-    const { imgs } = this.state;
-    const { names } = this.state;
+    const { id, names, imgs, fallbackImg } = this.state;
     return (
-      <div class='Menu'>
-        <h1>Promotions</h1>
-        <div class='container'>
-        {names.map((e, i) => {
-            const iImg = {
-              backgroundImage: `url(${imgs[i]})`
-            }
-
+      <div className='Promotions'>
+        <div className='title'>
+          <h1>Promotions</h1>
+        </div>
+        <div className='container'>
+        {names.map((name, i) => {
             return (
-              <div class='item'>
-                <div class='item-img' style={iImg}></div>
-                <div class='item-name'>{e}</div>
+              <div className='item' key={id[i]}>
+                <div className='item-img-container'>
+                  <Link to={`/promotions/${id[i]}`}>
+                    <img className='item-img' src={imgs[i]} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' />
+                  </Link>
+                </div>
+                <div className='item-name'>{name}</div>
               </div>
             );
           })
         }
         </div>
-
       </div>
     );
   }

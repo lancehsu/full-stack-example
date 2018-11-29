@@ -5,7 +5,7 @@ import './Pages.css';
 class Staffs extends Component {
   constructor(props) {
     super(props);
-    this.state = { id:[], names: [], imgs: [], fallbackImg: 'images/empty-staff.jpg' };
+    this.state = { id: [], names: [], abbr: [], imgs: [], fallbackImg: '/images/empty-staff.jpg' };
 
   }
   componentDidMount() {
@@ -14,25 +14,32 @@ class Staffs extends Component {
   getStaffs = async () => {
     const response = await fetch('/leaders', { method: 'GET' });
     const data = await response.json();
-    let names = data.map(e => e.name);
-    let imgs = data.map(e => e.image);
-    let id = data.map(e => e.id);
-    this.setState({ id, names, imgs });
+    const names = data.map(e => e.name);
+    const imgs = data.map(e => e.image);
+    const id = data.map(e => e._id);
+    const abbr = data.map(e => e.abbr);
+    this.setState({ id, names, abbr, imgs });
   }
   render() {
-    const { id, names, imgs, fallbackImg } = this.state;
+    const { id, names, abbr, imgs, fallbackImg } = this.state;
     return (
-      <div class='Menu'>
-        <h1>Staffs</h1>
-        <div class='container'>
-        {names.map((e, i) => {
-
+      <div className='Staffs'>
+        <div className='title'>
+          <h1>Staffs</h1>
+        </div>
+        <div className='container'>
+          {names.map((name, i) => {
             return (
-              <div class='item'>
-                <div class='item-img-container'>
-                  <Link to ><img  class='item-img' src={imgs[i]} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' /></Link>
+              <div className='item' key={id[i]}>
+                <div className='item-img-container'>
+                  <Link to={`/staffs/${id[i]}`}>
+                    <img className='item-img' src={imgs[i]} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' />
+                  </Link>
                 </div>
-                <div class='item-name'>{e}</div>
+                <div className='item-name'>
+                  <div>{name}</div>
+                  <div>{abbr[i]}</div>
+                </div>
               </div>
             );
           })

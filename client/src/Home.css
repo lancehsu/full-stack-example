@@ -28,36 +28,100 @@
   }
 }
 */
-.Home .container a {
+.Home a {
     color: whitesmoke;
     text-decoration: none;
 }
-.Home .container {
+.Home {
     color: whitesmoke;
     font-size: 200%;
     text-align: center;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: auto;
-    height: 2800px;
-    grid-template: repeat(1fr, 4) / 1fr
+    height: 2400px;
+    
 }
-.Home .container .item {
+.Home .home-item {
     padding: 30px;
+    min-height: 600px;
 }
-.Home .container #profile-img {
+.Home #profile-img {
     background-image: url('img/profile-image.jpg');
     background-position: center;
     background-size: cover;
 }
-.Home .container #promo {
-    background-image: url('img/buffet.jpg');
-}
-.Home .container #profile-menu {
+.Home .promo {
     background-color: #282c34;
+    height: 700px;
 }
-.Home .container #menu-title:hover {
+.Home .promo-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.Home .promo-container .icon {
+    font-size: 150%;
+}
+.Home .promo-container .icon:hover {
     color: grey;
 }
-.Home .container #aboutus {
+.Home .promo-img {
+    width: 600px;
+    height: 400px;
+}
+.Home #profile-menu {
+    background-color: #282c34;
+}
+.Home #menu-title:hover {
+    color: grey;
+}
+.Home .menu-scroll-plate {
+    margin: auto;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+
+}
+.Home .menu-scroll-plate .arrow {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-top: 5px solid whitesmoke;
+    border-right: 5px solid whitesmoke;
+}
+.Home .menu-scroll-plate .arrow:hover {
+    border-color: grey;
+    cursor: pointer;
+}
+.Home .menu-scroll-plate #left {
+    transform: rotate(-135deg);
+}
+.Home .menu-scroll-plate #right {
+    transform: rotate(45deg);
+}
+.Home .dish-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.Home .dish-img-container, .dish-img {
+    height: 150px;
+    widows: 150px;
+}
+
+.Home .dish-img-container:hover {
+    filter: brightness(70%);
+}
+.Home .dish-name {
+    font-size: 70%;
+    padding-top: 10px;
+}
+.Home .dish-img-container:hover + .dish-name {
+    color: grey;
+}
+.Home #aboutus {
     background-color: chocolate;
 }

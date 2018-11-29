@@ -22,24 +22,26 @@ nav {
     width: 100%;
     z-index: 1;
 }
-.linkPart {
+.Navlist {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     width: 35%;
 }
-#userPart {
+.Navuser {
     float: right;
+    margin-right: 50px;
     display: flex;
-    align-items: center;
     justify-content: space-around;
-    width: 45%;
+    align-items: center;
+    width: 30%;
 }
-#p-and-sr {
-    display: inline-flex;
-    align-items: center;
-    width: 50%;
-    justify-content: space-around;
+.click button {
+    margin-top: 3px
+}
+.login {
+    display: flex;
+    justify-content: space-between;
 }
 #logo {
     background-image: url('./img/logo.png');

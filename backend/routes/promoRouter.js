@@ -70,8 +70,7 @@ promoRouter.route('/:promoId')
     cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin,
     async (req, res, next) => {
       try {
-        const promo =
-        await Promotions.findByIdAndUpdate(req.params.promoId, { $set: req.body }, { new: true });
+        const promo = await Promotions.findByIdAndUpdate(req.params.promoId, { $set: req.body }, { new: true });
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(promo);

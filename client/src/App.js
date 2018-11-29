@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar.js';
+import NavList from './NavList.js';
+import NavUser from './NavUser.js';
 import Main from './Main.js';
 
 class App extends Component {
   render() {
     return (
-      <div class="App">
-        <Navbar class='navbar' />
-        <Main class='Main' />
+      <div className='App'>
+        <nav className='Navbar'>
+          <NavList className='navList' />
+          <NavUser className='navUser' />
+        </nav>
+        <Main className='Main' />
       </div>
     )
   }

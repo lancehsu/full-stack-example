@@ -90,7 +90,8 @@ usersRouter.get('/checkJWTToken', cors.corsWithOptions, (req, res, next) => {
     if (err) {
       next(err);
       return;
-    } else if (!user) {
+    }
+    if (!user) {
       res.statusCode = 401;
       res.setHeader('Content-Type', 'application/json');
       res.json({ status: 'JWT invalid!', sucess: false, err: info });

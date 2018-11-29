@@ -71,8 +71,7 @@ dishRouter.route('/:dishId')
     cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin,
     async (req, res, next) => {
       try {
-        const dish =
-          await Dishes.findByIdAndUpdate(req.params.dishId, { $set: req.body }, { new: true }).populate('comments.author');
+        const dish = await Dishes.findByIdAndUpdate(req.params.dishId, { $set: req.body }, { new: true }).populate('comments.author');
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(dish);
@@ -174,7 +173,8 @@ dishRouter.route('/:dishId/comments/:commentId')
         err.status = 404;
         next(err);
         return;
-      } else if (!dish.comments.id(req.params.commentId)) {
+      }
+      if (!dish.comments.id(req.params.commentId)) {
         const err = new Error(`Comment ${req.params.commentId} not found`);
         err.status = 404;
         next(err);
@@ -200,7 +200,8 @@ dishRouter.route('/:dishId/comments/:commentId')
         err.status = 404;
         next(err);
         return;
-      } else if (!dish.comments.id(req.params.commentId)) {
+      }
+      if (!dish.comments.id(req.params.commentId)) {
         const err = new Error(`Comment ${req.params.commentId} not found`);
         err.status = 404;
         next(err);
@@ -223,7 +224,8 @@ dishRouter.route('/:dishId/comments/:commentId')
         err.status = 404;
         next(err);
         return;
-      } else if (!dish.comments.id(req.params.commentId)) {
+      }
+      if (!dish.comments.id(req.params.commentId)) {
         const err = new Error(`Comment ${req.params.commentId} not found`);
         err.status = 404;
         next(err);
@@ -249,10 +251,10 @@ const modifyComment = (req, dish) => new Promise(async (resolve, reject) => {
     reject(err);
     return;
   }
-  dish.comments.id(req.params.commentId).rating =
-    req.body.rating || dish.comemnts.id(req.params.commentId).rating;
-  dish.comments.id(req.params.commentId).comment =
-    req.body.comment || dish.comemnts.id(req.params.commentId).comment;
+  dish.comments.id(req.params.commentId).rating = req.body.rating
+  || dish.comemnts.id(req.params.commentId).rating;
+  dish.comments.id(req.params.commentId).comment = req.body.comment
+  || dish.comemnts.id(req.params.commentId).comment;
   try {
     await dish.save();
     resolve(dish);
@@ -263,8 +265,8 @@ const modifyComment = (req, dish) => new Promise(async (resolve, reject) => {
 
 // delete it if the user is authorized
 const deleteComment = (req, dish) => new Promise(async (resolve, reject) => {
-  if (!req.user.admin &&
-    JSON.stringify(req.user.id)
+  if (!req.user.admin
+    && JSON.stringify(req.user.id)
     !== JSON.stringify(dish.comments.id(req.params.commentId).author)) {
     const err = new Error('You are not authorized to perform this operation!');
     err.status = 401;

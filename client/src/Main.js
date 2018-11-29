@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Home from './Home.js';
 import Menu from './Menu.js';
 import Staffs from './Staffs.js';
-import Register from './Register.js';
 import Promotions from './Promotions.js';
-import Dish from './Dish.js';
-import Person from './Person.js';
+import Detail from './Detail.js';
+import Favorites from './Favorites.js';
+import Register from './Register.js';
 
 class Main extends Component {
-  render(){
+  render() {
     return (
-     <main>
-       <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/menu' component={Menu} />
-          <Route path='/menu/:dishId' component={Dish} />
-          <Route path='/staffs' component={Staffs} />
-          <Route path='/staffs/:staffId' component={Person} />
+      <main>
+          <Route exact path='/' component={Home}/>
+          <Route exact path='/menu' component={Menu} />
+          <Route path='/menu/:dishId' component={Detail} />
+          <Route exact path='/staffs' component={Staffs} />
+          <Route path='/staffs/:staffId' component={Detail} />
           <Route path='/register' component={Register} />
-          <Route path='/promotions' component={Promotions} />
-       </Switch>
-      </main>
+          <Route exact path='/promotions' component={Promotions} />
+          <Route path='/promotions/:promoId' component={Detail} />
+          <Route path='/favorites' component={Favorites} />
+     </main>
     );
   }
 }
