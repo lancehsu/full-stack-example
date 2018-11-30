@@ -40,7 +40,7 @@ usersRouter.post('/signup', cors.corsWithOptions, async (req, res) => {
     await passport.authenticate('local');
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ sucess: true, status: 'Registration Sucessful!' });
+    res.json({ success: true, status: 'Registration successful!' });
   } catch (error) {
     res.statusCode = 500;
     res.setHeader('Content-Type', 'application/json');
@@ -71,7 +71,7 @@ usersRouter.post('/login', cors.corsWithOptions, (req, res, next) => {
       const jwtToken = authenticate.getToken({ id: req.user.id });
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json({ sucess: true, token: jwtToken, status: 'You are sucessfully logged in!' });
+      res.json({ success: true, token: jwtToken, status: 'You are successfully logged in!' });
     });
   })(req, res, next);
 });
@@ -81,7 +81,7 @@ usersRouter.get('/facebook/token', passport.authenticate('facebook-token'), (req
     const fbToken = authenticate.getToken({ id: req.user.id });
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ sucess: true, token: fbToken, status: 'You are sucessfully logged in!' });
+    res.json({ success: true, token: fbToken, status: 'You are successfully logged in!' });
   }
 });
 
@@ -94,13 +94,14 @@ usersRouter.get('/checkJWTToken', cors.corsWithOptions, (req, res, next) => {
     if (!user) {
       res.statusCode = 401;
       res.setHeader('Content-Type', 'application/json');
-      res.json({ status: 'JWT invalid!', sucess: false, err: info });
+      res.json({ status: 'JWT invalid!', success: false, err: info });
     }
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ status: 'JWT valid!', sucess: true, user });
+    res.json({ status: 'JWT valid!', success: true, user });
   })(req, res, next);
 });
+
 usersRouter.get('/logout', (req, res, next) => {
   if (req.session) {
     req.session.destroy();

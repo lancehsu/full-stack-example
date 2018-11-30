@@ -1,9 +1,9 @@
-.Menu, .Promotions, .Staffs {
+.Menu, .Promotions, .Staffs, .Favorites, .Register {
     padding: 5px;
     min-height: 600px;
     font-size: 200%;
-    color: whitesmoke;
-    background-color: chocolate;
+    color: #281c20;
+    background-color: #c9b799;
     text-align: center;
 }
 .Menu .title h1 {

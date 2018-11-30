@@ -29,11 +29,11 @@
 }
 */
 .Home a {
-    color: whitesmoke;
+    color: #281c20;
     text-decoration: none;
 }
 .Home {
-    color: whitesmoke;
+    color: #281c20;
     font-size: 200%;
     text-align: center;
     display: flex;
@@ -52,7 +52,7 @@
     background-size: cover;
 }
 .Home .promo {
-    background-color: #282c34;
+    background-color: #8e674e;
     height: 700px;
 }
 .Home .promo-container {
@@ -71,7 +71,7 @@
     height: 400px;
 }
 .Home #profile-menu {
-    background-color: #282c34;
+    background-color: #8e674e;
 }
 .Home #menu-title:hover {
     color: grey;
@@ -89,8 +89,8 @@
     display: inline-block;
     width: 60px;
     height: 60px;
-    border-top: 5px solid whitesmoke;
-    border-right: 5px solid whitesmoke;
+    border-top: 5px solid #281c20;
+    border-right: 5px solid #281c20;
 }
 .Home .menu-scroll-plate .arrow:hover {
     border-color: grey;
@@ -123,5 +123,5 @@
     color: grey;
 }
 .Home #aboutus {
-    background-color: chocolate;
+    background-color: #c9b799;
 }

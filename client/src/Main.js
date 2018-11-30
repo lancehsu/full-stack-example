@@ -7,6 +7,7 @@ import Promotions from './Promotions.js';
 import Detail from './Detail.js';
 import Favorites from './Favorites.js';
 import Register from './Register.js';
+import Me from './Me';
 
 class Main extends Component {
   render() {
@@ -21,6 +22,7 @@ class Main extends Component {
           <Route exact path='/promotions' component={Promotions} />
           <Route path='/promotions/:promoId' component={Detail} />
           <Route path='/favorites' component={Favorites} />
+          <Route path='/me' component={Me} />
      </main>
     );
   }

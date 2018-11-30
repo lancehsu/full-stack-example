@@ -1,3 +1,15 @@
+nav {
+    color: whitesmoke;
+    background-color:black;
+    opacity: 0.8;
+    padding: 12px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
 .link  {
     color: whitesmoke;
     background-color: black;
@@ -7,41 +19,11 @@
 .link:hover, .register:hover {
     color: grey;
 }
-
-.register {
-    color: whitesmoke;
-    font-size: 80%;
-}
-nav {
-    color: whitesmoke;
-    background-color:black;
-    opacity: 0.8;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
 .Navlist {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     width: 35%;
-}
-.Navuser {
-    float: right;
-    margin-right: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 30%;
-}
-.click button {
-    margin-top: 3px
-}
-.login {
-    display: flex;
-    justify-content: space-between;
 }
 #logo {
     background-image: url('./img/logo.png');
@@ -51,4 +33,23 @@ nav {
 }
 #logo:hover {
     filter: brightness(50%);
+}
+.Navuser {
+    float: right;
+    margin: auto;
+    margin-right: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+.click button {
+    margin-top: 3px
+}
+button {
+    cursor: pointer;
+}
+.register {
+    color: whitesmoke;
+    font-size: 80%;
 }

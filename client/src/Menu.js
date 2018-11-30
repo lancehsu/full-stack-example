@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css';
+import Auth from './Auth';
+import './Pages.css';
 
 class Menu extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Menu extends Component {
       , selector: [], imgs: [], filterIdx: [], fallbackImg: '/images/empty-dish.jpg'
     };
   }
+
   componentDidMount() {
     this.getMenu();
   }
@@ -28,7 +30,9 @@ class Menu extends Component {
     for (let i = 0; i < amount; i++) {
       filterIdx[i] = i;
     }
-    console.log(filterIdx);
+    //if it's logged in, add favorite checkbox
+    // await Auth.getUserInfo();
+    // console.log(filterIdx);
     this.setState({ id, amount, names, category, selector, imgs, filterIdx});
   }
 
@@ -49,7 +53,7 @@ class Menu extends Component {
 
   render() {
     let { id, names, selector, filterIdx, imgs, fallbackImg } = this.state;
-
+  
     return (
       <div className='Menu'>
         <div className='title'>

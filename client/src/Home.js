@@ -7,7 +7,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dishId: [], dishName: [], dishImg: [], dishFallbackImg: '/images/empty-dish.jpg', viewDish: [], dishAmount: 0
-      , promoId: [], promoName: [], promoImg: [], promoFallbackImg: '/images/promotions-icon.jpg'
+      , promoImg: [], promoFallbackImg: '/images/promotions-icon.jpg'
     }
   }
 
@@ -23,25 +23,23 @@ class Home extends Component {
     const dishAmount = dishName.length;
     response = await fetch('/promotions', { method: 'GET' });
     data = await response.json();
-    const promoId = data.map(e => e._id);
-    const promoName = data.map(e => e.name);
     const promoImg = data.map(e => e.image);
-    this.setState({ dishId, dishName, dishImg, viewDish: [0, 1], dishAmount, promoId, promoName, promoImg });
+    this.setState({ dishId, dishName, dishImg, viewDish: [0, 1], dishAmount, promoImg });
   }
   nextOne = (e) => {
     const dir = e.target.id; //left or right
     let { viewDish, dishAmount } = this.state;
     if (dir === 'left') {
-      viewDish = viewDish.map(e => (e === 0) ? dishAmount - 1 : e - 1);
-    } else {
       viewDish = viewDish.map(e => (e === dishAmount - 1) ? 0 : e + 1);
+    } else {
+      viewDish = viewDish.map(e => (e === 0) ? dishAmount - 1 : e - 1);
     }
     console.log(viewDish);
     this.setState({ viewDish });
   }
 
   render() {
-    let { dishId, dishName, dishImg, dishFallbackImg, viewDish, promoId, promoName, promoImg, promoFallbackImg } = this.state;
+    let { dishId, dishName, dishImg, dishFallbackImg, viewDish, promoImg, promoFallbackImg } = this.state;
     return (
       <div className='Home'>
           <div id='profile-img' className='home-item'></div>
