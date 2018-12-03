@@ -26,7 +26,7 @@ nav {
     width: 35%;
 }
 #logo {
-    background-image: url('./img/logo.png');
+    background-image: url('../img/logo.png');
     width:50px;
     height: 40px;
     background-size: contain;
@@ -34,7 +34,7 @@ nav {
 #logo:hover {
     filter: brightness(50%);
 }
-.Navuser {
+.Navuser.login {
     float: right;
     margin: auto;
     margin-right: 50px;
@@ -42,6 +42,15 @@ nav {
     justify-content: space-around;
     align-items: center;
     width: 30%;
+}
+.Navuser.no-login {
+    float: right;
+    margin: auto;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
 }
 .click button {
     margin-top: 3px

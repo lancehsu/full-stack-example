@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NavList from './NavList.js';
-import NavUser from './NavUser.js';
-import Main from './Main.js';
+import NavList from './container/NavListContainer';
+import NavUser from './container/NavUserContainer';
+import Main from './container/Main';
 
 class App extends Component {
   render() {

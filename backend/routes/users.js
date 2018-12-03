@@ -41,10 +41,10 @@ usersRouter.post('/signup', cors.corsWithOptions, async (req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json({ success: true, status: 'Registration successful!' });
-  } catch (error) {
+  } catch (err) {
     res.statusCode = 500;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ err: error });
+    res.json({ err });
   }
 });
 

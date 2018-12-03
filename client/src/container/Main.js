@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import Home from './Home.js';
-import Menu from './Menu.js';
-import Staffs from './Staffs.js';
-import Promotions from './Promotions.js';
-import Detail from './Detail.js';
-import Favorites from './Favorites.js';
-import Register from './Register.js';
-import Me from './Me';
+import Home from './HomeContainer';
+import Menu from './MenuContainer';
+import Staffs from './StaffsContainer';
+import Promotions from './PromotionsContainer';
+import Detail from './DetailContainer';
+import Favorites from './FavoritesContainer';
+import Register from './RegisterContainer';
+import Me from './MeContainer';
 
 class Main extends Component {
   render() {

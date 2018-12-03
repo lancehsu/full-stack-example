@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Detail.css';
+import Detail from '../component/Detail';
 
-class Detail extends Component {
+class DetailContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,34 +81,23 @@ class Detail extends Component {
 
   render() {
     const { type, name, designation, img, fallbackImg, description, price, category, comment, rating, authorName, authorId } = this.state;
-
     return (
-      <div className='Detail'>
-        <div className='profile'>
-          <div className='info'>
-            <div className='name'>{name}</div>
-            {type === 'staffs' && <div className='designation'>{designation}</div>}
-            {type === 'menu' && <div className='category'> Category: {category}</div>}
-            {(type === 'menu' || type === 'promotions') && <div className='price'>Price: {`$${price/100}`}</div>}
-            <div className='description'>{description}</div>
-          </div>
-          {/* GET src='(menu || promotions || staffs)/images/...' */}
-          <div className='img-container'><img className='img' src={`../${img}`} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' /></div>
-        </div>
-        {type === 'menu' && (
-          <div className='comments-container'>
-            {comment.map((e, i) => (
-              <div className='comment' key={[i]} author-id={authorId[i]}>
-                <div className='rating'>{rating[i]}</div>
-                <div className='context'>{e}</div>
-                <div className='authorName'>{authorName[i]}</div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      <Detail
+        type={type}
+        name={name}
+        designation={designation}
+        img={img}
+        fallbackImg={fallbackImg}
+        description={description}
+        price={price}
+        category={category}
+        comment={comment}
+        rating={rating}
+        authorName={authorName}
+        authorId={authorId}
+         />
     );
   }
 }
 
-export default Detail;
+export default DetailContainer;

@@ -1,41 +1,52 @@
 const Auth = {
   logIn(username, password) {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch('users/login', {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const { success, token, status } = await response.json();
-      this.setToken(token);
-      console.log(success)
-      return success ? resolve(status) : reject(status);
+      try {
+        const response = await fetch('users/login', {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const { success, token, status } = await response.json();
+        this.setToken(token);
+        console.log(`Login: ${success}`)
+        return success ? resolve(status) : reject(status);
+      } catch (err) {
+        console.log(err);
+      }
     })
   },
-  checkLogIn() { return new Promise(async (resolve, reject) => {
-    const token = this.getToken();
-    const response = await fetch('/users/checkJWTToken', {
-      method: 'GET',
-      headers: {
-        'Authorization': `bearer ${token}`
+  checkLogIn() {
+    return new Promise(async (resolve, reject) => {
+      const token = this.getToken();
+      try {
+        const response = await fetch('/users/checkJWTToken', {
+          method: 'GET',
+          headers: { 'Authorization': `bearer ${token}` }
+        });
+        const { success } = await response.json();
+        return success ? resolve(true) : reject(false);
+      } catch (err) {
+        console.log(err);
       }
-    });
-    const { success } = await response.json();
-    return success? resolve(true) : reject(false);
-  })
-    
+    })
+
   },
   getUserInfo() {
     return new Promise(async (resolve, reject) => {
       const token = this.getToken();
-      const response = await fetch('/users/me', {
-        method: 'GET',
-        headers: {
-          'Authorization': `bearer ${token}`
-        }
-      });
-      const data = await response.json();
-      return resolve(data);
+      try {
+        const response = await fetch('/users/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        return resolve(data);
+      } catch (err) {
+        console.log(err);
+      }
     });
   },
   logOut() {
