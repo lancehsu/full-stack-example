@@ -78,14 +78,14 @@ usersRouter.post('/login', cors.corsWithOptions, (req, res, next) => {
 
 usersRouter.get('/facebook/token', passport.authenticate('facebook-token'), (req, res) => {
   if (req.user) {
-    const fbToken = authenticate.getToken({ id: req.user.id });
+    const token = authenticate.getToken({ id: req.user.id });
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ success: true, token: fbToken, status: 'You are successfully logged in!' });
+    res.json({ success: true, token, status: 'You are successfully logged in!' });
   }
 });
 
-usersRouter.get('/checkJWTToken', cors.corsWithOptions, (req, res, next) => {
+usersRouter.get('/checkJWToken', cors.corsWithOptions, (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {
       next(err);

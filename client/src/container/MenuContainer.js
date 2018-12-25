@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import Menu from '../component/Menu'
+import { connect } from 'react-redux';
+import { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuCategory, getMenuAmount } from '../actions/menuActions';
+import { addOptions, selectOnChange } from '../actions';
+import { modifyFavorite } from '../actions/favoriteActions';
+import Menu from '../component/Menu';
 
 class MenuContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: [], amount: 0, names: [], category: []
-      , select: [], imgs: [], filterIdx: [], fallbackImg: '/images/empty-dish.jpg'
+      checked: false
     };
   }
 
@@ -14,46 +17,83 @@ class MenuContainer extends Component {
     this.getMenu();
   }
   getMenu = async () => {
+    try {
+      const { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuCategory, getMenuAmount, addOptions, selectOnChange } = this.props;
+      await fetchMenu();
+      getMenuName();
+      getMenuId();
+      getMenuImg();
+      getMenuCategory();
+      getMenuAmount();
 
-    const response = await fetch('/dishes', { method: 'GET' });
-    const data = await response.json();
-    const names = data.map(e => e.name);
-    const amount = names.length;
-    const imgs = data.map(e => e.image);
-    const id = data.map(e => e._id);
-    const category = data.map(e => e.category);
-    let select = category.filter((e, i) => category.indexOf(e) === i);
-    select = ['All'].concat(select);
-    let filterIdx = new Array(amount);
-    for (let i = 0; i < amount; i++) {
-      filterIdx[i] = i;
-    }
-    //if it's logged in, add favorite checkbox
-    // await Auth.getUserInfo();
-    // console.log(filterIdx);
-    this.setState({ id, amount, names, category, select, imgs, filterIdx });
-  }
+      const { amount, categories } = this.props;
+      // array of select list element
+      const optionsArray = ['All'].concat(categories.filter((e, i) => categories.indexOf(e) === i));
+      let initOption = null;
+      const options = optionsArray.map((option, i) => {
+        let filteredIdx = [];
+        if (option === 'All') {
+          filteredIdx = [...new Array(amount)];
+          filteredIdx = filteredIdx.map((e, i) => i);
+          initOption = { value: filteredIdx, label: 'All' };
+        } else {
+          categories.forEach((e, i) => e === option && filteredIdx.push(i));
+        }
+        return { value: filteredIdx, label: option };
+      });
 
-  filtering = (e) => {
-    const filterValue = e.target.value;
-    let filterIdx = [];
-    if (filterValue === 'All') {
-      filterIdx = new Array(this.state.amount);
-      for (let i = 0; i < this.state.amount; i++) {
-        filterIdx[i] = i;
-      }
-    } else {
-      this.state.category.forEach((e, i) => e === filterValue && filterIdx.push(i));
+      addOptions(options);
+      selectOnChange(initOption);
+    } catch (err) {
+      console.error(this.props.fetchMenuFailed || err);
     }
-    // console.log(filterIdx);
-    this.setState({ filterIdx });
   }
 
   render() {
-    const { id, names, select, filterIdx, imgs, fallbackImg } = this.state;
-    const filtering = this.filtering;
-    return <Menu id={id} names={names} select={select} filterIdx={filterIdx} imgs={imgs} fallbackImg={fallbackImg} filtering={filtering} />;
+    const { names, ids, imgs, selectedOption, options, loginStatus, favoriteList } = this.props;
+    const { selectOnChange, modifyFavorite } = this.props;
+    const checkedList = favoriteList.map(e => e.liked);
+
+
+    return (
+      <Menu
+        loginStatus={loginStatus}
+        checked={checkedList}
+        ids={ids}
+        names={names}
+        options={options}
+        selectedOption={selectedOption}
+        handleChange={e => selectOnChange(e)}
+        imgs={imgs}
+        favoriteClick={e => modifyFavorite(e.target.id)}
+      />
+    );
   }
 }
 
-export default MenuContainer;
+const mapStateToProp = state => {
+  return {
+  loginStatus: state.loginStatus,
+  names: state.menuName,
+  ids: state.menuId,
+  imgs: state.menuImg,
+  categories: state.menuCategory,
+  amount: state.menuAmount,
+  options: state.options,
+  selectedOption: state.selectedOption,
+  favoriteList: state.favoriteList
+}};
+
+const mapDispatchToProp = dispatch => ({
+  fetchMenu: () => dispatch(fetchMenu()),
+  getMenuName: () => dispatch(getMenuName()),
+  getMenuId: () => dispatch(getMenuId()),
+  getMenuImg: () => dispatch(getMenuImg()),
+  getMenuCategory: () => dispatch(getMenuCategory()),
+  getMenuAmount: () => dispatch(getMenuAmount()),
+  addOptions: options => dispatch(addOptions(options)),
+  selectOnChange: optionValue => dispatch(selectOnChange(optionValue)),
+  modifyFavorite: dishId => dispatch(modifyFavorite(dishId)),
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(MenuContainer);

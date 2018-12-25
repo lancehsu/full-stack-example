@@ -1,63 +1,47 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login, fillUsername, fillPassword, logout, facebookLogin } from '../actions/loginActions';
 import NavUser from '../component/NavUser';
-import Auth from '../Auth';
-import '../css/Navbar.css';
 
 class NavUserContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      login: false,
-      name: ''
-    }
-  }
-
-  activeLogin = async () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    if (!username) {
-      alert('Username needs to be filled!');
-      return;
-    }
-    if (!password) {
-      alert('Password needs to be filled!');
-      return;
-    }
-    try {
-      const status = await Auth.logIn(username, password);
-      alert(status);
-      //get login state
-      const login = await Auth.checkLogIn();
-
-      if (!login) { return; }
-
-      const response = await Auth.getUserInfo();
-      const { firstname, lastname } = response;
-      const name = `${firstname} ${lastname}`;
-      this.setState({ login, name });
-    } catch (err) {
-      alert(err);
-    }
-  }
-
-  activeLogout = () => {
-    Auth.logOut();
-    this.setState({ login: false, lastname: '' });
-  }
-
-  responseFacebook = (response) => {
-    console.log(response);
-    const { name } = response;
-    this.setState({ login: true, name })
-  }
 
   render() {
-    const { login, name } = this.state;
-    const activeLogin = this.activeLogin;
-    const activeLogout = this.activeLogout;
-    const responseFacebook = this.responseFacebook;
-    return <NavUser login={login} name={name} activeLogin={activeLogin} activeLogout={activeLogout} responseFacebook={responseFacebook} />;
+    // parameters
+    const { filledUsername, filledPassword, loginStatus, myFirstname, myLastname, adminVerification } = this.props;
+    // functions
+    const { fillUsername, fillPassword, login, logout, facebookLogin } = this.props;
+    return (
+      <NavUser
+        loginStatus={loginStatus}
+        firstname={myFirstname}
+        lastname={myLastname}
+        userValue={filledUsername}
+        passValue={filledPassword}
+        activeLogin={login}
+        activeLogout={logout}
+        responseFacebook={facebookLogin}
+        usernameOnChange={e => fillUsername(e.target.value)}
+        passwordOnChange={e => fillPassword(e.target.value)}
+        adminVerification={adminVerification}
+      />
+    );
   }
 }
+const mapStateToProp = state => ({
+    filledUsername: state.filledUsername,
+    filledPassword: state.filledPassword,
+    loginStatus: state.loginStatus,
+    myFirstname: state.myFirstname,
+    myLastname: state.myLastname,
+    adminVerification: state.adminVerification
+});
 
-export default NavUserContainer;
+const mapDispatchToProp = dispatch => ({
+  fillUsername: username => dispatch(fillUsername(username)),
+  fillPassword: password => dispatch(fillPassword(password)),
+  login: () => dispatch(login()),
+  logout: () => dispatch(logout()),
+  facebookLogin: response => dispatch(facebookLogin(response))
+});
+export default connect(mapStateToProp, mapDispatchToProp)(withRouter(NavUserContainer));

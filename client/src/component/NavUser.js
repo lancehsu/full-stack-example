@@ -1,39 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
-import '../css/Navbar.css';
+import { navuserLoginStyle, navuserNonloginStyle, navTextStyle, logoutButtonStyle } from '../style/Style';
+import Radium from 'radium';
 
-const NavUser = ({ login, name, activeLogin, activeLogout, responseFacebook }) =>
-  login ? (
-    <div className='Navuser login'>
-      <div>Hi, {(name.trim())? name : 'guest'}!</div>
-      <div><Link to='/me' className='link'>My Profile</Link></div>
-      <div><button className='logout' onClick={activeLogout}>Logout</button></div>
+const NavUser = ({ loginStatus, firstname, lastname, userValue, passValue, usernameOnChange, passwordOnChange, activeLogin, activeLogout, responseFacebook }) => {
+  return loginStatus ? (
+    <div className='Navuser' style={navuserLoginStyle}>
+      <div>Hi, {(firstname || lastname) ? `${firstname} ${lastname}` : 'guest'}!</div>
+      <Link to='/me' style={{ textDecoration: 'none' }}><div style={navTextStyle}>My Profile</div></Link>
+      <div className='logout' onClick={activeLogout} style={logoutButtonStyle}>Logout</div>
     </div>
   ) : (
-      <div className='Navuser no-login'>
+      <div className='Navuser' style={navuserNonloginStyle}>
+        <LoginInput id='username' value={userValue} onChange={usernameOnChange} />
+        <LoginInput id='password' value={passValue} onChange={passwordOnChange} />
         <div>
-          <div>Username: </div>
-          <input type='text' id='username' defaultValue='dog'></input>
-        </div>
-        <div>
-          <div>Password: </div>
-          <input type='password' id='password' defaultValue='password'></input>
-        </div>
-        <div className='click'>
-          <div><Link to='/register' className='register'>Register</Link></div>
-          <div><button className='submit' onClick={activeLogin}>Login</button></div>
+          <Link to='/register' className='register' style={{ textDecoration: 'none' }}><div style={{ ...navTextStyle, fontSize: '80%' }}>Register</div></Link>
+          <div className='submit' onClick={activeLogin} style={{ ...logoutButtonStyle, marginTop: 5 }}>Login</div>
         </div>
         <FbLogin callback={responseFacebook} />
       </div>
     );
-
-
+};
 const FbLogin = ({ callback }) => (
   <FacebookLogin
-    appId='235880893671025'
+    appId=''
     autoLoad={false}
-    fields="name,email,picture"
+    fields="name,email"
     textButton='Login'
     size='small'
     icon='fa-facebook'
@@ -41,4 +35,16 @@ const FbLogin = ({ callback }) => (
   />
 );
 
-export default NavUser;
+const LoginInput = ({ id, value, onChange }) => (
+  <input
+    id={id}
+    type={id === 'username' ? 'text' : 'password'}
+    maxLength='8'
+    size='16'
+    placeholder={id === 'username' ? 'Username' : 'Password'}
+    value={value}
+    onChange={onChange}
+  />
+);
+
+export default Radium(NavUser);

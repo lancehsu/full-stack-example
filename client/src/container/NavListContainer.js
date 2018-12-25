@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import NavList from '../component/NavList';
 
 class NavListContainer extends Component {
@@ -10,12 +11,11 @@ class NavListContainer extends Component {
   handleClick = (e) => {
     const isHome = this.props.location.pathname === '/';
     !isHome && this.props.history.push('/');
-    const scrollTo = e.target.id.split('-')[1];
+    const scrollTo = e.target.id.split('-')[1] || '';
     this.setState({ scrollTo });
 
   }
   componentDidUpdate() {
-
     const isHome = this.props.location.pathname === '/';
     const { scrollTo } = this.state;
     (isHome && scrollTo) ? (
@@ -25,9 +25,12 @@ class NavListContainer extends Component {
       )
   }
   render() {
-    const handleClick = this.handleClick;
-    return <NavList handleClick={handleClick} />;
+    const { adminVerification } = this.props;
+    return <NavList handleClick={this.handleClick} adminVerification={adminVerification} />;
   }
 }
+const mapStateToProp = state => ({
+  adminVerification: state.adminVerification
+})
 
-export default withRouter(NavListContainer);
+export default connect(mapStateToProp)(withRouter(NavListContainer));

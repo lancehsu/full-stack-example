@@ -1,27 +1,43 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchStaff, getStaffName, getStaffId, getStaffImg, getStaffAbbr } from '../actions/staffActions';
 import Staffs from '../component/Staffs';
 
 class StaffsContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { id: [], names: [], abbr: [], imgs: [], fallbackImg: '/images/empty-staff.jpg' };
-
-  }
   componentDidMount() {
     this.getStaffs();
   }
   getStaffs = async () => {
-    const response = await fetch('/leaders', { method: 'GET' });
-    const data = await response.json();
-    const names = data.map(e => e.name);
-    const imgs = data.map(e => e.image);
-    const id = data.map(e => e._id);
-    const abbr = data.map(e => e.abbr);
-    this.setState({ id, names, abbr, imgs });
+    try {
+      const { fetchStaff, getStaffName, getStaffId, getStaffImg, getStaffAbbr } = this.props;
+      await fetchStaff();
+      getStaffName();
+      getStaffId();
+      getStaffImg();
+      getStaffAbbr();
+    } catch (err) {
+      console.error(this.props.fetchStaffFailed || err);
+    }
   }
   render() {
-    const { id, names, abbr, imgs, fallbackImg } = this.state;
-    return <Staffs id={id} names={names} abbr={abbr} imgs={imgs} fallbackImg={fallbackImg} />;
-        }
-      }
-export default StaffsContainer;
+    const { ids, names, abbrs, imgs } = this.props;
+    return <Staffs ids={ids} names={names} abbrs={abbrs} imgs={imgs} />;
+  }
+}
+const mapStateToProp = state => ({
+  staffData: state.staffData,
+  names: state.staffName,
+  ids: state.staffId,
+  imgs: state.staffImg,
+  abbrs: state.staffAbbr
+});
+
+const mapDispatchToProp = dispatch => ({
+  fetchStaff: () => dispatch(fetchStaff()),
+  getStaffName: () => dispatch(getStaffName()),
+  getStaffId: () => dispatch(getStaffId()),
+  getStaffImg: () => dispatch(getStaffImg()),
+  getStaffAbbr: () => dispatch(getStaffAbbr()),
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(StaffsContainer);

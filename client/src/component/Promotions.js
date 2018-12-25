@@ -1,28 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/Pages.css';
+import Radium from 'radium';
+import { pageStyle, pageItemImgStyle, pageContainerStyle, pageItemStyle, pageItemNameStyle } from '../style/Style';
 
-const Promotions = ({ id, names, imgs, fallbackImg }) => (
-  <div className='Promotions'>
+const fallbackImg = '/images/promotions-icon.jpg';
+const { width, ...rest } = pageItemImgStyle;
+
+const Promotions = ({ ids, names, imgs }) => (
+  <div className='Promotions' style={pageStyle}>
     <div className='title'>
       <h1>Promotions</h1>
     </div>
-    <div className='container'>
-      {names.map((name, i) => {
-        return (
-          <div className='item' key={id[i]}>
-            <div className='item-img-container'>
-              <Link to={`/promotions/${id[i]}`}>
-                <img className='item-img' src={imgs[i]} onError={(e) => { e.target.onerror = null; e.target.src = fallbackImg }} alt='img break' />
-              </Link>
-            </div>
-            <div className='item-name'>{name}</div>
+    <div className='container' style={pageContainerStyle}>
+      {names && names.map((name, i) => (
+        <div className='item' key={i} style={pageItemStyle}>
+          <div className='item-img-container'>
+            <Link to={`/promotions/${ids[i]}`}>
+              <img
+                className='item-img'
+                src={imgs[i]}
+                onError={e => { e.target.onerror = null; e.target.src = fallbackImg }}
+                alt='img break'
+                key={i}
+                style={{ ...rest, width: 300 }}
+              />
+            </Link>
           </div>
-        );
-      })
+          <div className='item-name' style={pageItemNameStyle}>{name}</div>
+        </div>
+      )
+      )
       }
     </div>
   </div>
 );
 
-export default Promotions;
+export default Radium(Promotions);

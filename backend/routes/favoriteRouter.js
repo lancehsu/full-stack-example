@@ -48,8 +48,7 @@ favoriteRouter.route('/')
     res.end('PUT operaton not supported on /favorites');
   })
   .delete(
-    cors.corsWithOptions, authenticate.verifyUser
-    , async (req, res, next) => {
+    cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
       try {
         const resp = await Favorites.findOneAndRemove({ user: req.user.id });
         res.statusCode = 200;
@@ -75,7 +74,8 @@ favoriteRouter.route('/:dishId')
         res.setHeader('Content-Type', 'application/json');
         res.json({ exist: false, favorites: favorite });
         return;
-      } else if (!dish) {
+      }
+      if (!dish) {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json({ exist: false, favorites: favorite });

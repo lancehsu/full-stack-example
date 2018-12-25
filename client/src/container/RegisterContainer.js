@@ -1,30 +1,69 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
+import axios from 'axios';
 import Register from '../component/Register';
 
 class RegisterContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signupUsername: '',
+      signupPassword: '',
+      signupFirstname: '',
+      signupLastname: '',
+      signupSuccess: false
+    }
+  }
+  inputChangeHandler = (e) => {
+    const value = e.target.value;
+    const idArr = e.target.id.split('-');
+    const input = `${idArr[0]}${idArr[1][0].toUpperCase()}${idArr[1].slice(1)}`;
+    this.setState({ [input]: value });
+  }
   signup = async () => {
-
-    const username = document.getElementById('register-username').value;
-    const password = document.getElementById('register-password').value;
-    const firstname = document.getElementById('register-firstname').value;
-    const lastname = document.getElementById('register-lastname').value;
-
     try {
-      const response = await fetch('/users/signup', {
-        method: 'POST',
-        body: JSON.stringify({ username, password, firstname, lastname }),
+      const { signupUsername, signupPassword, signupFirstname, signupLastname } = this.state;
+      const minLength = 4; // minLength of username and password input
+      if (signupUsername.length < minLength) {
+        alert('Username should be 4 - 8 characters');
+        return;
+      }
+      if (signupPassword.length < minLength) {
+        alert('Password should be 4 - 8 characters');
+        return;
+      }
+      const response = await axios.post('/users/signup',
+        JSON.stringify({ username: signupUsername, password: signupPassword, firstname: signupFirstname, lastname: signupLastname }), {
         headers: { 'Content-Type': 'application/json' }
       });
-      const { status, err } = await response.json();
-      alert(status || err.message);
+      const { data } = response;
+      alert(data.status);
+      this.setState({ signupSuccess: true });
     } catch (err) {
       console.log(err);
     }
 
   }
   render() {
-    const signup = this.signup;
-    return <Register signup={signup} />;
+    const { signupSuccess, signupUsername, signupPassword, signupFirstname, signupLastname } = this.state;
+    const { loginStatus } = this.props;
+
+    return loginStatus || signupSuccess ? (
+      <Redirect to='/' />
+    ) : (
+        <Register
+          signup={this.signup}
+          signupUsername={signupUsername}
+          signupPassword={signupPassword}
+          signupFirstname={signupFirstname}
+          signupLastname={signupLastname}
+          inputChangeHandler={this.inputChangeHandler}
+        />
+      );
   }
 }
-export default RegisterContainer;
+const mapStateToProp = state => ({
+  loginStatus: state.loginStatus,
+});
+export default connect(mapStateToProp)(RegisterContainer);

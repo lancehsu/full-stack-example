@@ -1,12 +1,14 @@
 import React from 'react';
-import '../css/Pages.css';
+import { pageStyle, sheetStyle } from '../style/Style';
 
 const Me = ({ firstname, lastname, username }) => (
-  <div className='Me'>
+  <div className='Me' style={pageStyle}>
     <div><h1>My Profile</h1></div>
-    <div><h2>Firstname : {firstname}</h2></div>
-    <div><h2>Lastname : {lastname}</h2></div>
-    <div><h2>Username : {username}</h2></div>
+    <div style={sheetStyle}>
+      <div>Username: {username}</div>
+      <div>Firstname : {firstname}</div>
+      <div>Lastname : {lastname}</div>
+    </div>
   </div>
 );
 

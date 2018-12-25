@@ -1,23 +1,51 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchFavorite, getFavoriteId, getFavoriteName, getFavoriteImg, getFavoriteCategory, getFavoriteAmount, modifyFavorite } from '../actions/favoriteActions';
 import Favorites from '../component/Favorites';
-import Auth from '../Auth';
 
 class FavoritesContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { login: false };
-  }
+
   componentWillMount() {
-    Auth.checkLogIn()
-      .then(res => this.setState({ login: true }))
-      .catch(e => {
-        alert('Log in first!!!!');
-        this.props.history.push('/');
-      })
+    const { loginStatus } = this.props;
+    !loginStatus && alert('Login first!!!');
   }
+
   render() {
-    return <Favorites />;
+    const { loginStatus, names, ids, imgs, categories, amount} = this.props;
+    const { modifyFavorite } = this.props
+    return (loginStatus) ? (
+      <Favorites
+        names={names}
+        ids={ids}
+        imgs={imgs}
+        categories={categories}
+        amount={amount}
+        checked={true}
+        modifyFavorite={e => modifyFavorite(e.target.id)}
+      />) : <Redirect to='/' />;
   }
 }
 
-export default FavoritesContainer;
+const mapStateToProp = state => ({
+  loginStatus: state.loginStatus,
+  favoriteData: state.favoriteData,
+  names: state.favoriteName,
+  ids: state.favoriteId,
+  imgs: state.favoriteImg,
+  categories: state.favoriteCategory,
+  amount: state.favoriteAmount,
+  favoriteList: state.favoriteList
+});
+
+const mapDispatchToProp = dispatch => ({
+  fetchFavorite: () => dispatch(fetchFavorite()),
+  getFavoriteId: () => dispatch(getFavoriteId()),
+  getFavoriteName: () => dispatch(getFavoriteName()),
+  getFavoriteImg: () => dispatch(getFavoriteImg()),
+  getFavoriteCategory: () => dispatch(getFavoriteCategory()),
+  getFavoriteAmount: () => dispatch(getFavoriteAmount()),
+  modifyFavorite: id => dispatch(modifyFavorite(id))
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(FavoritesContainer);

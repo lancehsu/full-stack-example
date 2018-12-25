@@ -1,61 +1,68 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchMenu, getMenuId, getMenuName, getMenuImg, getMenuAmount } from '../actions/menuActions';
+import { fetchPromo, getPromoImg } from '../actions/promoActions';
+import { scrollToLeft, scrollToRight } from '../actions';
 import Home from '../component/Home';
 
 class HomeContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishId: [], dishName: [], dishImg: [], dishFallbackImg: '/images/empty-dish.jpg', viewDish: [], dishAmount: 0
-      , promoImg: [], promoFallbackImg: '/images/promotions-icon.jpg'
-    }
-  }
 
   componentDidMount() {
-    this.getInit();
+    this.getHome();
   }
-  getInit = async () => {
+  getHome = async () => {
     try {
-      let response = await fetch('/dishes', { method: 'GET' });
-      let data = await response.json();
-      const dishId = data.map(e => e._id);
-      const dishName = data.map(e => e.name);
-      const dishImg = data.map(e => e.image);
-      const dishAmount = dishName.length;
-      response = await fetch('/promotions', { method: 'GET' });
-      data = await response.json();
-      const promoImg = data.map(e => e.image);
-      this.setState({ dishId, dishName, dishImg, viewDish: [0, 1], dishAmount, promoImg });
+      const { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuAmount, fetchPromo, getPromoImg } = this.props;
+      await Promise.all([fetchMenu(), fetchPromo()]);
+      getMenuName();
+      getMenuId();
+      getMenuImg();
+      getMenuAmount();
+      getPromoImg();
     } catch (err) {
       console.log(err);
     }
   }
   nextOne = (e) => {
     const dir = e.target.id; //left or right
-    let { viewDish, dishAmount } = this.state;
-    if (dir === 'left') {
-      viewDish = viewDish.map(e => (e === dishAmount - 1) ? 0 : e + 1);
-    } else {
-      viewDish = viewDish.map(e => (e === 0) ? dishAmount - 1 : e - 1);
-    }
-    this.setState({ viewDish });
+    const { menuAmount, scrollToLeft, scrollToRight } = this.props;
+    dir === 'left' ? scrollToLeft(menuAmount) : scrollToRight(menuAmount);
   }
 
   render() {
-    const { dishId, dishName, dishImg, dishFallbackImg, viewDish, promoImg, promoFallbackImg } = this.state;
-    const nextOne = this.nextOne;
+    const { menuName, menuId, menuImg, promoImg, scrollView } = this.props;
     return (
       <Home
-        dishId={dishId}
-        dishName={dishName}
-        dishImg={dishImg}
-        dishFallbackImg={dishFallbackImg}
-        viewDish={viewDish}
+        dishId={menuId}
+        dishName={menuName}
+        dishImg={menuImg}
+        viewDish={scrollView}
         promoImg={promoImg}
-        promoFallbackImg={promoFallbackImg}
-        nextOne={nextOne}
+        nextOne={this.nextOne}
       />
     );
   }
 }
 
-export default HomeContainer;
+const mapStateToProp = state => ({
+  menuName: state.menuName,
+  menuId: state.menuId,
+  menuImg: state.menuImg,
+  menuAmount: state.menuAmount,
+  promoImg: state.promoImg,
+  scrollView: state.scrollView
+});
+
+const mapDispatchToProp = dispatch => ({
+  fetchMenu: () => dispatch(fetchMenu()),
+  getMenuId: () => dispatch(getMenuId()),
+  getMenuName: () => dispatch(getMenuName()),
+  getMenuImg: () => dispatch(getMenuImg()),
+  getMenuAmount: () => dispatch(getMenuAmount()),
+  fetchPromo: () => dispatch(fetchPromo()),
+  getPromoImg: () => dispatch(getPromoImg()),
+  scrollToLeft: amount => dispatch(scrollToLeft(amount)),
+  scrollToRight: amount => dispatch(scrollToRight(amount))
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(HomeContainer);
