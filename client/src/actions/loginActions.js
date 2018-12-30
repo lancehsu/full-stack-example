@@ -151,8 +151,22 @@ export const facebookLogin = fbResponse => async (dispatch) => {
     const { data } = response;
     if (data.success) {
       alert(data.status);
-      const firstname = name.split(' ')[0];
-      const lastname = name.split(' ')[1];
+      const nameArray = name.split(' ');
+      let firstname, lastname;
+      if (nameArray.length === 2) {
+        // English name
+        firstname = nameArray[0];
+        lastname = nameArray[1];
+      } else if (nameArray.length === 1) {
+        // Chinese name
+        firstname = nameArray[0].slice(1);
+        lastname = nameArray[0][0];
+      } else {
+        // others
+        firstname = nameArray[0];
+        lastname = nameArray[nameArray.length - 1];
+      }
+
       dispatch(getLoginStatus(data.success));
       dispatch(getMyFirstname(firstname));
       dispatch(getMyLastname(lastname));

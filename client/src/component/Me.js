@@ -6,8 +6,8 @@ const Me = ({ firstname, lastname, username }) => (
     <div><h1>My Profile</h1></div>
     <div style={sheetStyle}>
       <div>Username: {username}</div>
-      <div>Firstname : {firstname}</div>
-      <div>Lastname : {lastname}</div>
+      <div>Firstname: {firstname}</div>
+      <div>Lastname: {lastname}</div>
     </div>
   </div>
 );

@@ -43,7 +43,7 @@ const Navbar = ({
 
 const FbLogin = ({ callback }) => (
   <FacebookLogin
-    appId=''
+    appId='130404877900948'
     autoLoad={false}
     fields='name,email'
     textButton='Login'

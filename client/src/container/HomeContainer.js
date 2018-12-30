@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMenu, getMenuId, getMenuName, getMenuImg, getMenuAmount } from '../actions/menuActions';
 import { fetchPromo, getPromoImg } from '../actions/promoActions';
-import { scrollToLeft, scrollToRight } from '../actions/homeActions';
+import { nowScroll, scrollToLeft, scrollToRight } from '../actions/homeActions';
 import Home from '../component/Home';
 
 class HomeContainer extends Component {
@@ -24,11 +24,8 @@ class HomeContainer extends Component {
     }
   }
   componentDidUpdate() {
-    const { homeScrollTo } = this.props;
-    homeScrollTo === 'aboutus' &&
-      window.scrollTo({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
-
-    homeScrollTo === 'logo' && window.scrollTo(0, 0);
+    const { homeScrollTo, nowScroll } = this.props;
+    homeScrollTo && nowScroll();
   }
   nextOne = (e) => {
     const dir = e.target.id; //left or right
@@ -72,6 +69,7 @@ const mapDispatchToProp = dispatch => ({
   getPromoImg: () => dispatch(getPromoImg()),
   scrollToLeft: amount => dispatch(scrollToLeft(amount)),
   scrollToRight: amount => dispatch(scrollToRight(amount)),
+  nowScroll: () => dispatch(nowScroll())
 });
 
 export default connect(mapStateToProp, mapDispatchToProp)(HomeContainer);
