@@ -39,7 +39,6 @@ class MenuDetailContainer extends Component {
     getCommentsRating();
     getCommentsAuthorId();
     getCommentsAuthorName();
-
   }
 
   render() {

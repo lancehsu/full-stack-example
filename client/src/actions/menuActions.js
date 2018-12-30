@@ -8,6 +8,8 @@ export const GET_MENU_ID = 'GET_MENU_ID';
 export const GET_MENU_IMG = 'GET_MENU_IMG';
 export const GET_MENU_CATEGORY = 'GET_MENU_CATEGORY';
 export const GET_MENU_AMOUNT = 'GET_MENU_AMOUNT';
+export const ADD_OPTIONS = 'ADD_OPTIONS';
+export const SELECT_ON_CHANGE = 'SELECT_ON_CHANGE';
 
 //get menu info
 const fetchMenuPending = () => ({
@@ -69,3 +71,13 @@ export const getMenuAmount = () => (dispatch, getState) => {
     payload: data.length
   });
 };
+
+// select list operation
+export const addOptions = options => ({
+  type: ADD_OPTIONS,
+  payload: options
+});
+export const selectOnChange = selectedOption => ({
+  type: SELECT_ON_CHANGE,
+  payload: selectedOption
+});

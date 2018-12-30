@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMenu, getMenuId, getMenuName, getMenuImg, getMenuAmount } from '../actions/menuActions';
 import { fetchPromo, getPromoImg } from '../actions/promoActions';
-import { scrollToLeft, scrollToRight } from '../actions';
+import { scrollToLeft, scrollToRight } from '../actions/homeActions';
 import Home from '../component/Home';
 
 class HomeContainer extends Component {
@@ -20,8 +20,15 @@ class HomeContainer extends Component {
       getMenuAmount();
       getPromoImg();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
+  }
+  componentDidUpdate() {
+    const { homeScrollTo } = this.props;
+    homeScrollTo === 'aboutus' &&
+      window.scrollTo({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
+
+    homeScrollTo === 'logo' && window.scrollTo(0, 0);
   }
   nextOne = (e) => {
     const dir = e.target.id; //left or right
@@ -31,6 +38,7 @@ class HomeContainer extends Component {
 
   render() {
     const { menuName, menuId, menuImg, promoImg, scrollView } = this.props;
+
     return (
       <Home
         dishId={menuId}
@@ -50,7 +58,8 @@ const mapStateToProp = state => ({
   menuImg: state.menuImg,
   menuAmount: state.menuAmount,
   promoImg: state.promoImg,
-  scrollView: state.scrollView
+  scrollView: state.scrollView,
+  homeScrollTo: state.homeScrollTo
 });
 
 const mapDispatchToProp = dispatch => ({
@@ -62,7 +71,7 @@ const mapDispatchToProp = dispatch => ({
   fetchPromo: () => dispatch(fetchPromo()),
   getPromoImg: () => dispatch(getPromoImg()),
   scrollToLeft: amount => dispatch(scrollToLeft(amount)),
-  scrollToRight: amount => dispatch(scrollToRight(amount))
+  scrollToRight: amount => dispatch(scrollToRight(amount)),
 });
 
 export default connect(mapStateToProp, mapDispatchToProp)(HomeContainer);

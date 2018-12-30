@@ -4,7 +4,7 @@ import Radium from 'radium';
 import { pageStyle, pageItemImgStyle, pageContainerStyle, pageItemStyle, pageItemNameStyle } from '../style/Style';
 
 const fallbackImg = '/images/promotions-icon.jpg';
-const { width, ...rest } = pageItemImgStyle;
+const { width, ...pageItemImgStyleRest } = pageItemImgStyle;
 
 const Promotions = ({ ids, names, imgs }) => (
   <div className='Promotions' style={pageStyle}>
@@ -22,7 +22,7 @@ const Promotions = ({ ids, names, imgs }) => (
                 onError={e => { e.target.onerror = null; e.target.src = fallbackImg }}
                 alt='img break'
                 key={i}
-                style={{ ...rest, width: 300 }}
+                style={{ ...pageItemImgStyleRest, width: 300 }}
               />
             </Link>
           </div>

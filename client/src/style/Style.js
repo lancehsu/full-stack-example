@@ -2,6 +2,7 @@ export const color = {
   fontColor: '#281c20',
   backgroundColor: '#c9b799',
   homeBackgroundColor: '#8e674e',
+  navBarColor: '#333333',
   navFontColor: 'whitesmoke',
   hoverColor: 'grey'
 };
@@ -18,8 +19,7 @@ export const heartCheckboxStyle = (checked) => ({
 //Style of Navigation bar
 export const navStyle = {
   color: color.navFontColor,
-  backgroundColor: 'black',
-  opacity: '0.8',
+  backgroundColor: color.navBarColor,
   padding: '12px',
   position: 'fixed',
   top: '0px',
@@ -27,18 +27,23 @@ export const navStyle = {
   zIndex: '1',
   display: 'flex',
   alignItems: 'center',
+
 };
 
 export const navList = {
-  display: 'inline-flex',
+  display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
   width: '40%',
+  overflow: 'auto',
+  whiteSpace: 'nowrap'
 };
 
 export const logo = {
   backgroundImage: 'url(/img/logo.png)',
+  margin: '0px 3px',
+  minWidth: '50px',
   width: '50px',
+  minHeight: '40px',
   height: '40px',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
@@ -48,6 +53,7 @@ export const logo = {
   }
 };
 export const navTextStyle = {
+  margin: '0px 3px',
   color: color.navFontColor,
   cursor: pointer.cursor,
   ':hover': {
@@ -55,26 +61,37 @@ export const navTextStyle = {
   }
 }
 export const navuserLoginStyle = {
-  float: 'right',
+  height: '40px',
   marginLeft: 'auto',
-  marginRight: '50px',
   display: 'flex',
-  justifyContent: 'space-around',
   alignItems: 'center',
-  width: '30%'
+  width: '25%',
+  overflow: 'auto',
+  whiteSpace: 'nowrap'
 };
 
 export const navuserNonloginStyle = {
-  float: 'right',
+  height: '40px',
   marginLeft: 'auto',
-  marginRight: '20px',
   display: 'flex',
-  justifyContent: 'space-around',
   alignItems: 'center',
-  width: '40%'
+  width: '35%',
+  overflow: 'auto',
+  whiteSpace: 'nowrap'
 };
 export const logoutButtonStyle = {
   padding: 2,
+  margin: '0px 10px',
+  cursor: pointer.cursor,
+  color:'black',
+  backgroundColor: 'whitesmoke',
+  textAlign: 'center',
+  borderRadius: 3,
+  fontSize: '80%'
+}
+export const loginButtonStyle = {
+  padding: 2,
+  margin: '5px 10px 0px 10px',
   cursor: pointer.cursor,
   color:'black',
   backgroundColor: 'whitesmoke',
@@ -203,6 +220,12 @@ export const menuPlateRightArrowStyle = {
 export const menuTitleStyle = {
   color: color.fontColor,
   textDecoration: 'none',
+  margin: '80px auto',
+  width: '200px',
+  height: '80px',
+  fontSize: '250%',
+  fontWeight: 'bold',
+  textAlign: 'center',
   ':hover': {
     color: color.hoverColor
   }
@@ -248,3 +271,21 @@ export const sheetStyle = {
   justifyContent: 'space-around',
   alignItems: 'center'
 }
+//Style of comments
+export const commentStyle = {
+  width: 400,
+  height: 100,
+  maxHeight: 200,
+  borderStyle: 'solid',
+  borderRadius: 3,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '5px 10px'
+};
+export const commentButtonStyle = {
+  borderRadius: 3,
+  cursor: pointer.cursor,
+  backgroundColor: color.navFontColor,
+  fontSize: '60%'
+};

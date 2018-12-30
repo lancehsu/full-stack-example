@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuCategory, getMenuAmount } from '../actions/menuActions';
-import { addOptions, selectOnChange } from '../actions';
+import { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuCategory, getMenuAmount, addOptions, selectOnChange } from '../actions/menuActions';
 import { modifyFavorite } from '../actions/favoriteActions';
 import Menu from '../component/Menu';
 
@@ -73,16 +72,17 @@ class MenuContainer extends Component {
 
 const mapStateToProp = state => {
   return {
-  loginStatus: state.loginStatus,
-  names: state.menuName,
-  ids: state.menuId,
-  imgs: state.menuImg,
-  categories: state.menuCategory,
-  amount: state.menuAmount,
-  options: state.options,
-  selectedOption: state.selectedOption,
-  favoriteList: state.favoriteList
-}};
+    loginStatus: state.loginStatus,
+    names: state.menuName,
+    ids: state.menuId,
+    imgs: state.menuImg,
+    categories: state.menuCategory,
+    amount: state.menuAmount,
+    options: state.options,
+    selectedOption: state.selectedOption,
+    favoriteList: state.favoriteList
+  }
+};
 
 const mapDispatchToProp = dispatch => ({
   fetchMenu: () => dispatch(fetchMenu()),

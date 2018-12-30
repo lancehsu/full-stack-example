@@ -18,92 +18,92 @@ export const detailData = (state = null, action) => {
   }
 }
 export const detailName = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_NAME:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailId = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_ID:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailImg = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_IMG:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailCategory = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_CATEGORY:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailAbbr = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_ABBR:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailPrice = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_PRICE:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailDescription = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_DESCRIPTION:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailDesignation = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_DESIGNATION:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };
 export const detailComments = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DETAIL_COMMENTS:
       return action.payload;
-      case DETAIL_UNMOUNT:
+    case DETAIL_UNMOUNT:
       return null;
-      default:
+    default:
       return state;
   }
 };

@@ -11,15 +11,15 @@ class MeContainer extends Component {
   }
 
   render() {
-    const { loginStatus, userFirstname, userLastname, userAccount } = this.props;
-    return loginStatus ? <Me firstname={userFirstname} lastname={userLastname} username={userAccount} /> : <Redirect to='/' />;
+    const { loginStatus, myFirstname, myLastname, myAccount } = this.props;
+    return loginStatus ? <Me firstname={myFirstname} lastname={myLastname} username={myAccount} /> : <Redirect to='/' />;
   }
 }
 const mapStateToProp = state => ({
   loginStatus: state.loginStatus,
-  userFirstname: state.userFirstname,
-  userLastname: state.userLastname,
-  userAccount: state.userAccount
+  myFirstname: state.myFirstname,
+  myLastname: state.myLastname,
+  myAccount: state.myAccount
 });
 
 export default connect(mapStateToProp)(MeContainer);

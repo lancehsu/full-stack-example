@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { homeScrolling } from '../actions/homeActions';
 import { login, fillUsername, fillPassword, logout, facebookLogin } from '../actions/loginActions';
-import NavUser from '../component/NavUser';
+import Navbar from '../component/Navbar';
 
-class NavUserContainer extends Component {
+class NavbarContainer extends Component {
 
   render() {
     // parameters
     const { filledUsername, filledPassword, loginStatus, myFirstname, myLastname, adminVerification } = this.props;
     // functions
-    const { fillUsername, fillPassword, login, logout, facebookLogin } = this.props;
+    const { homeScrolling, fillUsername, fillPassword, login, logout, facebookLogin } = this.props;
     return (
-      <NavUser
+      <Navbar
+        handleClick={e => homeScrolling(e.target.id)}
+        adminVerification={adminVerification}
         loginStatus={loginStatus}
         firstname={myFirstname}
         lastname={myLastname}
@@ -23,25 +25,25 @@ class NavUserContainer extends Component {
         responseFacebook={facebookLogin}
         usernameOnChange={e => fillUsername(e.target.value)}
         passwordOnChange={e => fillPassword(e.target.value)}
-        adminVerification={adminVerification}
-      />
+    />
     );
   }
 }
 const mapStateToProp = state => ({
-    filledUsername: state.filledUsername,
-    filledPassword: state.filledPassword,
-    loginStatus: state.loginStatus,
-    myFirstname: state.myFirstname,
-    myLastname: state.myLastname,
-    adminVerification: state.adminVerification
+  adminVerification: state.adminVerification,
+  filledUsername: state.filledUsername,
+  filledPassword: state.filledPassword,
+  loginStatus: state.loginStatus,
+  myFirstname: state.myFirstname,
+  myLastname: state.myLastname,
 });
-
 const mapDispatchToProp = dispatch => ({
+  homeScrolling: scrollingIdx => dispatch(homeScrolling(scrollingIdx)),
   fillUsername: username => dispatch(fillUsername(username)),
   fillPassword: password => dispatch(fillPassword(password)),
   login: () => dispatch(login()),
   logout: () => dispatch(logout()),
   facebookLogin: response => dispatch(facebookLogin(response))
-});
-export default connect(mapStateToProp, mapDispatchToProp)(withRouter(NavUserContainer));
+})
+
+export default connect(mapStateToProp, mapDispatchToProp)(NavbarContainer);

@@ -46,7 +46,7 @@ export const getDetailName = () => (dispatch, getState) => {
   const { data } = getState().detailData;
   dispatch({
     type: GET_DETAIL_NAME,
-    payload: data.name || data.dish.name
+    payload: data.name
   });
 };
 export const getDetailId = () => (dispatch, getState) => {
@@ -61,14 +61,14 @@ export const getDetailImg = () => (dispatch, getState) => {
   const { data } = getState().detailData;
   dispatch({
     type: GET_DETAIL_IMG,
-    payload: data.image || data.dish.image
+    payload: data.image
   });
 };
 export const getDetailCategory = () => (dispatch, getState) => {
   const { data } = getState().detailData;
   dispatch({
     type: GET_DETAIL_CATEGORY,
-    payload: data.category || data.dish.category
+    payload: data.category
   });
 };
 export const getDetailAbbr = () => (dispatch, getState) => {
@@ -82,7 +82,7 @@ export const getDetailPrice = () => (dispatch, getState) => {
   const { data } = getState().detailData;
   dispatch({
     type: GET_DETAIL_PRICE,
-    payload: data.price || data.dish.price
+    payload: data.price
   })
 };
 export const getDetailDescription = () => (dispatch, getState) => {
@@ -99,11 +99,14 @@ export const getDetailDesignation = () => (dispatch, getState) => {
     payload: data.designation
   });
 };
-export const getDetailComments = () => (dispatch, getState) => {
-  const { data } = getState().detailData;
+export const getDetailComments = comments => (dispatch, getState) => {
+  if (!comments) {
+    const { data } = getState().detailData;
+    comments = data.comments;
+  }
   dispatch({
     type: GET_DETAIL_COMMENTS,
-    payload: data.comments || data.dish.comments
+    payload: comments
   });
 };
 export const detailUnmount = () => ({

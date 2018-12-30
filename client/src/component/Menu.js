@@ -33,7 +33,7 @@ const Menu = ({ ids, names, options, selectedOption, handleChange, imgs, loginSt
               </Link>
             </div>
             <div className='item-name' style={{ ...pageItemNameStyle, display: 'flex' }}>
-              {loginStatus && <div className='heart-checkbox' id={ids[i]} onClick={favoriteClick} style={{ ...heartCheckboxStyle(checked[i]), width: 20, height: 18, marginRight: 15 }} />}
+              {loginStatus && <div className='heart-checkbox' id={ids[i]} onClick={favoriteClick} style={{ ...heartCheckboxStyle(checked[i]), minWidth: 10, width: 20, minHeight: 9, height: 18, marginRight: 15 }} />}
               {names[i]}
             </div>
           </div>

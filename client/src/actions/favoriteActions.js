@@ -68,7 +68,6 @@ export const getFavoriteCategory = () => (dispatch, getState) => {
 };
 export const getFavoriteAmount = () => (dispatch, getState) => {
   const { dishes } = getState().favoriteData.data;
-  console.log('hey you');
   dispatch({
     type: GET_FAVORITE_AMOUNT,
     payload: dishes.length
@@ -91,9 +90,7 @@ export const buildFavoriteList = () => async (dispatch, getState) => {
     }
     const { favoriteId } = getState();
     menuId = getState().menuId;
-    console.log(favoriteId, menuId);
     const list = menuId.map(id => ({ id, liked: favoriteId.includes(id) }));
-    console.log(list);
     dispatch({
       type: BUILD_FAVORITELIST,
       payload: list 
@@ -153,7 +150,6 @@ export const modifyFavorite = id => async (dispatch, getState) => {
     await dispatch(buildFavoriteList());
     favoriteList = getState().favoriteList;
   }
-  console.log(favoriteList);
   // if true -> remove the favorite : if false -> add the favorite
   favoriteList.find(e => e.id === id).liked ? dispatch(removeFavorite(id)) : dispatch(addFavorite(id));
 };

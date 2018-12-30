@@ -208,7 +208,7 @@ dishRouter.route('/:dishId/comments/:commentId')
         return;
       }
       await modifyComment(req, dish);
-      const resp = Dishes.findById(dish.id).populate('comments.author');
+      const resp = await Dishes.findById(dish.id).populate('comments.author');
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(resp);
@@ -252,11 +252,12 @@ const modifyComment = (req, dish) => new Promise(async (resolve, reject) => {
     return;
   }
   dish.comments.id(req.params.commentId).rating = req.body.rating
-  || dish.comemnts.id(req.params.commentId).rating;
+    || dish.comemnts.id(req.params.commentId).rating;
   dish.comments.id(req.params.commentId).comment = req.body.comment
-  || dish.comemnts.id(req.params.commentId).comment;
+    || dish.comemnts.id(req.params.commentId).comment;
   try {
     await dish.save();
+    console.log('fuck');
     resolve(dish);
   } catch (err) {
     reject(err);

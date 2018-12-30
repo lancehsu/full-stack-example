@@ -12,11 +12,11 @@ const promoFallbackImg = '/images/promotions-icon.jpg';
 
 const Home = ({ dishId, dishName, dishImg, viewDish, promoImg, nextOne }) => (
   <div className='Home' style={homeStyle}>
-    <div id='profile-img' style={{...itemStyle, ...profileImg}}></div>
+    <div id='profile-img' style={{ ...itemStyle, ...profileImg }}></div>
     <HomePromo promoImg={promoImg} />
     <HomeMenu nextOne={nextOne} viewDish={viewDish} dishId={dishId} dishImg={dishImg} dishName={dishName} />
     <div id='aboutus' style={{ ...itemStyle, backgroundColor: color.backgroundColor }}>
-      <h1>About Us</h1>
+      <div style={{ fontSize: '250%', fontWeight: 'bold', margin: '80px 0px' }}>About Us</div>
       <p>Here is our info.</p>
     </div>
   </div>
@@ -27,7 +27,7 @@ const HomePromo = Radium(({ promoImg }) => (
     className='HomePromo'
     style={{ ...itemStyle, backgroundColor: color.homeBackgroundColor, height: 700 }}
   >
-    <div><h1>Promotions</h1></div>
+    <div style={{ fontSize: '250%', fontWeight: 'bold', margin: '80px 0px' }}>Promotions</div>
     <div className='promo-container' style={promoContainerStyle}>
       <img
         className='promo-img'
@@ -50,8 +50,8 @@ const HomePromo = Radium(({ promoImg }) => (
 ));
 
 const HomeMenu = Radium(({ nextOne, viewDish, dishId, dishImg, dishName }) => (
-  <div className='HomeMenu' style={{ ...itemStyle, backgroundColor: color.homeBackgroundColor }}>
-    <h1><Link to='/menu' className='title' style={{textDecoration: 'none'}}><div style={menuTitleStyle}>Menu</div></Link></h1>
+  <div className='HomeMenu' style={{ ...itemStyle, backgroundColor: color.homeBackgroundColor, height: 700 }}>
+    <Link to='/menu' className='title' style={{ textDecoration: 'none' }}><div style={menuTitleStyle}>Menu</div></Link>
     <div className='menu-plate' style={menuPlateStyle}>
       <div onClick={nextOne} className='arrow' id='left' key='left' style={menuPlateLeftArrowStyle}></div>
       <div className='dish-container' style={dishContainerStyle}>

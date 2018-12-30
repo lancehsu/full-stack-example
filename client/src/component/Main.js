@@ -15,7 +15,7 @@ import UsersContainer from '../container/UsersContainer';
 class Main extends Component {
   render() {
     return (
-      <main style={{ marginTop: 64 }}>
+      <main className='Main' style={{ marginTop: 64 }}>
         <Route exact path='/' component={HomeContainer} />
         <Route exact path='/menu' component={MenuContainer} />
         <Route path='/menu/:dishId' component={MenuDetailContainer} />

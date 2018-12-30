@@ -12,7 +12,7 @@ class FavoritesContainer extends Component {
   }
 
   render() {
-    const { loginStatus, names, ids, imgs, categories, amount} = this.props;
+    const { loginStatus, names, ids, imgs, categories, amount } = this.props;
     const { modifyFavorite } = this.props
     return (loginStatus) ? (
       <Favorites
