@@ -36,7 +36,9 @@ export const fetchFavorite =  () => async (dispatch, getState) => {
   }
 };
 export const getFavoriteName = () => (dispatch, getState) => {
-  const { dishes } = getState().favoriteData.data;
+  const { data } = getState().favoriteData;
+  let dishes = [];
+  if (data) { dishes = data.dishes; };
   dispatch({
     type: GET_FAVORITE_NAME,
     payload: dishes.map(e => e.name)
@@ -44,7 +46,9 @@ export const getFavoriteName = () => (dispatch, getState) => {
 };
 
 export const getFavoriteId = () => (dispatch, getState) => {
-  const { dishes } = getState().favoriteData.data;
+  const { data } = getState().favoriteData;
+  let dishes = [];
+  if (data) { dishes = data.dishes; };
   dispatch({
     type: GET_FAVORITE_ID,
     payload: dishes.map(e => e._id)
@@ -52,7 +56,9 @@ export const getFavoriteId = () => (dispatch, getState) => {
 };
 
 export const getFavoriteImg = () => (dispatch, getState) => {
-  const { dishes } = getState().favoriteData.data;
+  const { data } = getState().favoriteData;
+  let dishes = [];
+  if (data) { dishes = data.dishes; };
   dispatch({
     type: GET_FAVORITE_IMG,
     payload: dishes.map(e => e.image)
@@ -60,14 +66,18 @@ export const getFavoriteImg = () => (dispatch, getState) => {
 };
 
 export const getFavoriteCategory = () => (dispatch, getState) => {
-  const { dishes } = getState().favoriteData.data;
+  const { data } = getState().favoriteData;
+  let dishes = [];
+  if (data) { dishes = data.dishes; };
   dispatch({
     type: GET_FAVORITE_CATEGORY,
     payload: dishes.map(e => e.category)
   });
 };
 export const getFavoriteAmount = () => (dispatch, getState) => {
-  const { dishes } = getState().favoriteData.data;
+  const { data } = getState().favoriteData;
+  let dishes = [];
+  if (data) { dishes = data.dishes; };
   dispatch({
     type: GET_FAVORITE_AMOUNT,
     payload: dishes.length

@@ -6,8 +6,10 @@ const logger = require('morgan');
 // const FileStore = require('session-file-store')(session);
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./config');
+const compression = require('compression');
+const helmet = require('helmet');
 
+const config = require('./config');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const dishRouter = require('./routes/dishRouter');
@@ -17,16 +19,6 @@ const uploadRouter = require('./routes/uploadRouter');
 const favoriteRouter = require('./routes/favoriteRouter');
 
 const app = express();
-/*
-app.all('*', (req, res, next) => {
-  if (req.secure) {
-    next();
-    return;
-  }
-  res.redirect(307, `https://${req.hostname}:${app.get('secPort')}${req.url}`);
-  // "req.url" will contain rest of the url except localhost and port number!
-});
-*/
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url, { useNewUrlParser: true });
@@ -51,6 +43,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression());
+app.use(helmet());
 
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);

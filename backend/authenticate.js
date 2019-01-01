@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const jwt = require('jsonwebtoken');
-const FacebookTokenStrategy = require('passport-facebook-token');
+// const FacebookTokenStrategy = require('passport-facebook-token');
 
 const User = require('./models/user');
 const config = require('./config');
@@ -29,24 +29,24 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts, async (jwtPayload, done
     return done(err, false);
   }
 }));
-exports.facebookPassport = passport.use(new FacebookTokenStrategy({
-  clientID: config.facebook.clientId, clientSecret: config.facebook.clientSecret,
-}, async (accessToken, refreshToken, profile, done) => {
-  try {
-    let user = await User.findOne({ facebookId: profile.id });
-    if (user) {
-      return done(null, user);
-    }
-    user = new User({ username: profile.displayName });
-    user.facebookId = profile.id;
-    user.firstname = profile.name.givenName;
-    user.lastname = profile.name.familyName;
-    await user.save();
-    return done(null, user);
-  } catch (err) {
-    return done(err, false);
-  }
-}));
+// exports.facebookPassport = passport.use(new FacebookTokenStrategy({
+//   clientID: config.facebook.clientId, clientSecret: config.facebook.clientSecret,
+// }, async (accessToken, refreshToken, profile, done) => {
+//   try {
+//     let user = await User.findOne({ facebookId: profile.id });
+//     if (user) {
+//       return done(null, user);
+//     }
+//     user = new User({ username: profile.displayName });
+//     user.facebookId = profile.id;
+//     user.firstname = profile.name.givenName;
+//     user.lastname = profile.name.familyName;
+//     await user.save();
+//     return done(null, user);
+//   } catch (err) {
+//     return done(err, false);
+//   }
+// }));
 
 exports.verifyUser = passport.authenticate('jwt', { session: false });
 exports.verifyAdmin = (req, res, next) => {

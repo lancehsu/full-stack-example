@@ -108,7 +108,6 @@ export const modifyComment = commentId => async (dispatch, getState) => {
     });
   } else if (modifyCommentMode === -1 && !commentId) {
     // edit mode
-    console.log('shit');
     const { ratingToAdd, contextToAdd, commentsId, editedIdx } = getState();
     const commentId = commentsId[editedIdx];
     response = await axios.put(`/dishes/${detailId}/comments/${commentId}`, JSON.stringify({ rating: ratingToAdd, comment: contextToAdd }), {
