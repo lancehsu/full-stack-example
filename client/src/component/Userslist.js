@@ -3,7 +3,7 @@ import { pageStyle, sheetStyle } from '../style/Style';
 
 const {width, alignItems ,...rest} = sheetStyle;
 
-const Users = ({ usersFirstname, usersLastname, usersId, usersAccount, usersAdmin }) => (
+const Userslist = ({ usersFirstname, usersLastname, usersId, usersAccount, usersAdmin }) => (
   <div className='Register' style={pageStyle}>
     <h1>Users List</h1>
     <div className='context' style={{...rest, width: '90%', fontSize: '60%'}}>
@@ -22,4 +22,4 @@ const Users = ({ usersFirstname, usersLastname, usersId, usersAccount, usersAdmi
   </div>
 );
 
-export default Users;
+export default Userslist;

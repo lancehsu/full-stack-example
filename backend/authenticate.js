@@ -29,6 +29,7 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts, async (jwtPayload, done
     return done(err, false);
   }
 }));
+
 // exports.facebookPassport = passport.use(new FacebookTokenStrategy({
 //   clientID: config.facebook.clientId, clientSecret: config.facebook.clientSecret,
 // }, async (accessToken, refreshToken, profile, done) => {

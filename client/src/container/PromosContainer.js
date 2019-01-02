@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPromo, getPromoId, getPromoImg, getPromoName } from '../actions/promoActions';
-import Promotions from '../component/Promotions';
+import Promos from '../component/Promos';
 
-class PromotionsContainer extends Component {
+class PromosContainer extends Component {
   componentDidMount() {
     this.getPromos();
   }
@@ -20,7 +20,7 @@ class PromotionsContainer extends Component {
   }
   render() {
     const { ids, name, imgs } = this.props;
-    return <Promotions ids={ids} names={name} imgs={imgs} />;
+    return <Promos ids={ids} names={name} imgs={imgs} />;
   }
 }
 
@@ -38,4 +38,4 @@ const mapDispatchToProp = dispatch => ({
   getPromoImg: () => dispatch(getPromoImg()),
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)(PromotionsContainer);
+export default connect(mapStateToProp, mapDispatchToProp)(PromosContainer);

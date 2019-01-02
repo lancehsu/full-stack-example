@@ -6,7 +6,7 @@ import { pageStyle, pageItemImgStyle, pageContainerStyle, pageItemStyle, pageIte
 const fallbackImg = '/images/promotions-icon.jpg';
 const { width, ...pageItemImgStyleRest } = pageItemImgStyle;
 
-const Promotions = ({ ids, names, imgs }) => (
+const Promos = ({ ids, names, imgs }) => (
   <div className='Promotions' style={pageStyle}>
     <div className='title'>
       <h1>Promotions</h1>
@@ -15,7 +15,7 @@ const Promotions = ({ ids, names, imgs }) => (
       {names && names.map((name, i) => (
         <div className='item' key={i} style={pageItemStyle}>
           <div className='item-img-container'>
-            <Link to={`/promotions/${ids[i]}`}>
+            <Link to={`/promos/${ids[i]}`}>
               <img
                 className='item-img'
                 src={imgs[i]}
@@ -35,4 +35,4 @@ const Promotions = ({ ids, names, imgs }) => (
   </div>
 );
 
-export default Radium(Promotions);
+export default Radium(Promos);

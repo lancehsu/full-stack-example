@@ -14,7 +14,8 @@ class PromoDetailContainer extends Component {
   }
   getDetail = async () => {
     const { fetchDetail, getDetailName, getDetailId, getDetailImg, getDetailPrice, getDetailDescription } = this.props;
-    const url = this.props.location.pathname;
+    let url = this.props.location.pathname;
+    url = url.replace('promos', 'promotions');
     await fetchDetail(url);
     getDetailName();
     getDetailId();

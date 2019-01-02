@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login';
 import { navStyle, navList, navTextStyle, logo, navuserLoginStyle, navuserNonloginStyle, logoutButtonStyle, loginButtonStyle } from '../style/Style';
 import Radium from 'radium';
 
@@ -15,11 +15,11 @@ const Navbar = ({
       <div className='Navlist' style={navList}>
         <Link to='/' onClick={handleClick}><div id='logo' key={0} style={logo} /></Link>
         <Link to='/' onClick={handleClick} style={{ textDecoration: 'none' }}><div id='aboutus' key={1} style={navTextStyle}>About us</div></Link>
-        <Link to='/promotions' style={{ textDecoration: 'none' }}><div key={2} style={navTextStyle}>Promotions</div></Link>
+        <Link to='/promos' style={{ textDecoration: 'none' }}><div key={2} style={navTextStyle}>Promotions</div></Link>
         <Link to='/menu' style={{ textDecoration: 'none' }}><div key={3} style={navTextStyle}>Menu</div></Link>
         <Link to='/staffs' style={{ textDecoration: 'none' }}><div key={4} style={navTextStyle}>Staffs</div></Link>
         <Link to='/favorites' style={{ textDecoration: 'none' }}><div key={5} style={navTextStyle}>Favorites</div></Link>
-        {adminVerification && <Link to='/users' style={{ textDecoration: 'none' }}><div key={6} style={navTextStyle}>Users</div></Link>}
+        {adminVerification && <Link to='/userslist' style={{ textDecoration: 'none' }}><div key={6} style={navTextStyle}>Users</div></Link>}
       </div>
       {loginStatus ? (
         <div className='Navuser' style={navuserLoginStyle}>
@@ -33,6 +33,7 @@ const Navbar = ({
             <LoginInput id='password' value={passValue} onChange={passwordOnChange} />
             <Link to='/register' className='register' style={{ textDecoration: 'none' }}><div style={{ ...navTextStyle, fontSize: '80%' }}>Register</div></Link>
             <div className='submit' onClick={activeLogin} style={loginButtonStyle}>Login</div>
+            {/*<FbLogin callback={responseFacebook} />*/}
           </div>
         )}
     </nav>
@@ -54,7 +55,7 @@ const LoginInput = ({ id, value, onChange }) => (
   <input
     id={id}
     type={id === 'username' ? 'text' : 'password'}
-    style={{ margin: '0px 5px' }}
+    style={{ margin: '0px 10px' }}
     maxLength='8'
     size='16'
     placeholder={id === 'username' ? 'Username' : 'Password'}

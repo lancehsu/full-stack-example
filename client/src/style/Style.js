@@ -63,6 +63,7 @@ export const navTextStyle = {
 export const navuserLoginStyle = {
   height: '40px',
   marginLeft: 'auto',
+  marginRight: '20px',
   display: 'flex',
   alignItems: 'center',
   width: '25%',
@@ -73,9 +74,10 @@ export const navuserLoginStyle = {
 export const navuserNonloginStyle = {
   height: '40px',
   marginLeft: 'auto',
+  marginRight: '20px',
   display: 'flex',
   alignItems: 'center',
-  width: '35%',
+  width: '32%',
   overflow: 'auto',
   whiteSpace: 'nowrap'
 };

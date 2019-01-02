@@ -7,5 +7,5 @@ npm run setup
 ```
 then
 ```
-npm start
+npm run dev
 ```

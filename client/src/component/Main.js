@@ -5,12 +5,12 @@ import MenuContainer from '../container/MenuContainer';
 import MenuDetailContainer from '../container/MenuDetailContainer';
 import StaffsContainer from '../container/StaffsContainer';
 import StaffDetailContainer from '../container/StaffDetailContainer';
-import PromotionsContainer from '../container/PromotionsContainer';
+import PromosContainer from '../container/PromosContainer';
 import PromoDetailContainer from '../container/PromoDetailContainer';
 import FavoritesContainer from '../container/FavoritesContainer';
 import RegisterContainer from '../container/RegisterContainer';
 import MeContainer from '../container/MeContainer';
-import UsersContainer from '../container/UsersContainer';
+import UserslistContainer from '../container/UserslistContainer';
 
 class Main extends Component {
   render() {
@@ -22,11 +22,11 @@ class Main extends Component {
         <Route exact path='/staffs' component={StaffsContainer} />
         <Route path='/staffs/:staffId' component={StaffDetailContainer} />
         <Route path='/register' component={RegisterContainer} />
-        <Route exact path='/promotions' component={PromotionsContainer} />
-        <Route path='/promotions/:promoId' component={PromoDetailContainer} />
+        <Route exact path='/promos' component={PromosContainer} />
+        <Route path='/promos/:promoId' component={PromoDetailContainer} />
         <Route exact path='/favorites' component={FavoritesContainer} />
         <Route path='/me' component={MeContainer} />
-        <Route path='/users' component={UsersContainer} />
+        <Route path='/userslist' component={UserslistContainer} />
       </main>
     );
   }

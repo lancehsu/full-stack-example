@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getUserslist } from '../actions/loginActions';
-import Users from '../component/Users';
+import Userslist from '../component/Userslist';
 
-class UsersContainer extends Component {
+class UserslistContainer extends Component {
   componentDidMount() {
     this.getUsers();
   }
@@ -16,7 +16,7 @@ class UsersContainer extends Component {
   render() {
     const { loginStatus, adminVerification, usersFirstname, usersLastname, usersId, usersAccount, usersAdmin } = this.props;
     return (loginStatus && adminVerification) ? (
-      <Users
+      <Userslist
         usersFirstname={usersFirstname}
         usersLastname={usersLastname}
         usersId={usersId}
@@ -38,4 +38,4 @@ const mapStateToProp = state => ({
 const mapDispatchToProp = dispatch => ({
   getUserslist: () => dispatch(getUserslist())
 });
-export default connect(mapStateToProp, mapDispatchToProp)(UsersContainer);
+export default connect(mapStateToProp, mapDispatchToProp)(UserslistContainer);
