@@ -43,7 +43,8 @@ export const login = () => async (dispatch, getState) => {
       dispatch(getLoginStatus(data.success));
       await dispatch(fetchMyInfo(data.token));
 
-      const { firstname, lastname, username, _id, admin } = getState().myInfoData.data;
+      let { firstname, lastname, username, _id, admin } = getState().myInfoData.data;
+      
       dispatch(getMyFirstname(firstname));
       dispatch(getMyLastname(lastname));
       dispatch(getMyAccount(username));

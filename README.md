@@ -1,12 +1,11 @@
 # Full Stack Example
->A demo of full stack application  with React-Redux front-end and Node Express back-end. In this case, MongoDB is used as a database. 
+>A demo of full stack application with React-Redux front-end, Node Express back-end and MongoDB database.
 ## Usage
-
-Install client and backend dependencies
+Install all dependencies
 ```
 npm run setup
 ```
-then 
+then
 ```
 npm start
 ```
