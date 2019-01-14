@@ -3,7 +3,7 @@ import { detailTitleStyle, heartCheckboxStyle } from '../style/Style';
 
 const fallbackImg = '/images/empty-dish.jpg';
 
-const MenuDetail = ({ loginStatus, checked, favoriteClick, name, img, id, description, price, category, comments, commentsId, ratings, authorNames, authorIds }) => (
+const MenuDetail = ({ loginStatus, checked, favoriteClick, name, img, id, description, price, category }) => (
   <div
     className='profile'
     style={{ display: 'flex', margin: '30px 100px' }}

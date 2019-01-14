@@ -37,7 +37,7 @@ const HomePromo = Radium(({ promoImg }) => (
         style={{ width: 600, height: 400 }}
       />
       <Link
-        to='/promotions'
+        to='/promos'
         className='icon'
         style={{ textDecoration: 'none' }}
       >

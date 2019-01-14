@@ -12,7 +12,6 @@ dishRouter.route('/')
   .get(cors.cors, async (req, res, next) => {
     try {
       const dishes = await Dishes.find(req.query).populate('comments.author');
-      console.log(req.query);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(dishes);
@@ -257,7 +256,6 @@ const modifyComment = (req, dish) => new Promise(async (resolve, reject) => {
     || dish.comemnts.id(req.params.commentId).comment;
   try {
     await dish.save();
-    console.log('fuck');
     resolve(dish);
   } catch (err) {
     reject(err);

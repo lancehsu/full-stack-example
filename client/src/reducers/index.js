@@ -6,7 +6,7 @@ import { detailData, detailId, detailName, detailImg, detailPrice, detailCategor
 import { commentsContext, commentsId, commentsRating, commentsAuthor, commentsAuthorId, commentsAuthorName, modifyCommentMode, ratingToAdd, contextToAdd, editedIdx } from './commentReducer';
 import { scrollView, homeScrollTo } from './homeReducer';
 import { filledUsername, filledPassword, loginResponse, token, loginStatus, myInfoData, myFirstname, myLastname, myAccount, myId, adminVerification, usersFirstname, usersLastname, usersAccount, usersId, usersAdmin } from './loginReducer';
-import { favoriteData, favoriteName, favoriteId, favoriteImg, favoriteCategory, favoriteAmount, favoriteList } from './favoriteReducer';
+import { favoriteData, favoriteName, favoriteId, favoriteImg, favoriteCategory, favoriteAmount, favoriteList } from './favoritelistReducer';
 
 export default combineReducers({
   homeScrollTo,

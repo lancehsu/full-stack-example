@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMenu, getMenuName, getMenuId, getMenuImg, getMenuCategory, getMenuAmount, addOptions, selectOnChange } from '../actions/menuActions';
-import { modifyFavorite } from '../actions/favoriteActions';
+import { modifyFavorite } from '../actions/favoritelistActions';
 import Menu from '../component/Menu';
 
 class MenuContainer extends Component {

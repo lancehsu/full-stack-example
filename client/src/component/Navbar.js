@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import { navStyle, navList, navTextStyle, logo, navuserLoginStyle, navuserNonloginStyle, logoutButtonStyle, loginButtonStyle } from '../style/Style';
 import Radium from 'radium';
 
@@ -18,7 +18,7 @@ const Navbar = ({
         <Link to='/promos' style={{ textDecoration: 'none' }}><div key={2} style={navTextStyle}>Promotions</div></Link>
         <Link to='/menu' style={{ textDecoration: 'none' }}><div key={3} style={navTextStyle}>Menu</div></Link>
         <Link to='/staffs' style={{ textDecoration: 'none' }}><div key={4} style={navTextStyle}>Staffs</div></Link>
-        <Link to='/favorites' style={{ textDecoration: 'none' }}><div key={5} style={navTextStyle}>Favorites</div></Link>
+        <Link to='/favoritelist' style={{ textDecoration: 'none' }}><div key={5} style={navTextStyle}>Favorites</div></Link>
         {adminVerification && <Link to='/userslist' style={{ textDecoration: 'none' }}><div key={6} style={navTextStyle}>Users</div></Link>}
       </div>
       {loginStatus ? (

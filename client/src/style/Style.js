@@ -9,7 +9,7 @@ export const color = {
 export const pointer = { cursor: 'pointer' };
 
 export const heartCheckboxStyle = (checked) => ({
-  backgroundImage: checked? 'url(/img/heart.png)' : 'url(/img/empty-heart.png)',
+  backgroundImage: checked? 'url(/images/heart.png)' : 'url(/images/empty-heart.png)',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
   cursor: pointer.cursor
@@ -39,7 +39,7 @@ export const navList = {
 };
 
 export const logo = {
-  backgroundImage: 'url(/img/logo.png)',
+  backgroundImage: 'url(/images/logo.png)',
   margin: '0px 3px',
   minWidth: '50px',
   width: '50px',
@@ -181,7 +181,7 @@ export const itemStyle = {
   minHeight: '600px'
 }
 export const profileImg = {
-  backgroundImage: 'url(/img/profile-image.jpg)',
+  backgroundImage: 'url(/images/profile-image.jpg)',
   backgroundPosition: 'center',
   backgroundSize: 'cover'
 };

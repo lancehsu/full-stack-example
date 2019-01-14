@@ -5,7 +5,7 @@ import { color, pointer, commentStyle, commentButtonStyle } from '../style/Style
 const Comments = ({ myId, comments, commentsId, ratings, authorIds, authorNames, toAddNewComment, toEditComment, modifyCommentMode, cancelComment, addRating, ratingToAdd, addContext, contextToAdd, addComment, editComment, editedIdx, deleteComment }) => (
   <div className='comments-container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     {comments.length > 0 &&
-      <div style={{ height: '348px', overflow: 'auto', whiteSpace: 'nowrap' }}>
+      <div style={{ maxHeight: '348px', overflow: 'auto', whiteSpace: 'nowrap' }}>
         {comments.map((e, i) => (
           modifyCommentMode === -1 && comments.length - 1 - i === editedIdx ? (
             <AddComment

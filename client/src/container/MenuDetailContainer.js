@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchDetail, getDetailName, getDetailId, getDetailImg, getDetailCategory, getDetailPrice, getDetailDescription, getDetailComments, detailUnmount } from '../actions/detailActions';
 import { getCommentsContext, getCommentsId, getCommentsRating, getCommentsAuthor, getCommentsAuthorId, getCommentsAuthorName } from '../actions/commentActions';
-import { modifyFavorite } from '../actions/favoriteActions';
+import { modifyFavorite } from '../actions/favoritelistActions';
 import MenuDetail from '../component/MenuDetail';
 import CommentsContainer from './CommentsContainer';
 import { detailStyle } from '../style/Style';

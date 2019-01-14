@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { buildFavoriteList } from './favoriteActions';
+import { buildFavoriteList } from './favoritelistActions';
 
 export const FILL_USERNAME = 'FILL_USERNAME';
 export const FILL_PASSWORD = 'FILL_PASSWORD';

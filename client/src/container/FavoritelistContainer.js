@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchFavorite, getFavoriteId, getFavoriteName, getFavoriteImg, getFavoriteCategory, getFavoriteAmount, modifyFavorite } from '../actions/favoriteActions';
-import Favorites from '../component/Favorites';
+import { fetchFavorite, getFavoriteId, getFavoriteName, getFavoriteImg, getFavoriteCategory, getFavoriteAmount, modifyFavorite } from '../actions/favoritelistActions';
+import Favoritelist from '../component/Favoritelist';
 
-class FavoritesContainer extends Component {
+class FavoritelistContainer extends Component {
 
   componentWillMount() {
     const { loginStatus } = this.props;
@@ -15,7 +15,7 @@ class FavoritesContainer extends Component {
     const { loginStatus, names, ids, imgs, categories, amount } = this.props;
     const { modifyFavorite } = this.props
     return (loginStatus) ? (
-      <Favorites
+      <Favoritelist
         names={names}
         ids={ids}
         imgs={imgs}
@@ -48,4 +48,4 @@ const mapDispatchToProp = dispatch => ({
   modifyFavorite: id => dispatch(modifyFavorite(id))
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)(FavoritesContainer);
+export default connect(mapStateToProp, mapDispatchToProp)(FavoritelistContainer);

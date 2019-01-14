@@ -7,7 +7,7 @@ import StaffsContainer from '../container/StaffsContainer';
 import StaffDetailContainer from '../container/StaffDetailContainer';
 import PromosContainer from '../container/PromosContainer';
 import PromoDetailContainer from '../container/PromoDetailContainer';
-import FavoritesContainer from '../container/FavoritesContainer';
+import FavoritelistContainer from '../container/FavoritelistContainer';
 import RegisterContainer from '../container/RegisterContainer';
 import MeContainer from '../container/MeContainer';
 import UserslistContainer from '../container/UserslistContainer';
@@ -24,7 +24,7 @@ class Main extends Component {
         <Route path='/register' component={RegisterContainer} />
         <Route exact path='/promos' component={PromosContainer} />
         <Route path='/promos/:promoId' component={PromoDetailContainer} />
-        <Route exact path='/favorites' component={FavoritesContainer} />
+        <Route exact path='/favoritelist' component={FavoritelistContainer} />
         <Route path='/me' component={MeContainer} />
         <Route path='/userslist' component={UserslistContainer} />
       </main>

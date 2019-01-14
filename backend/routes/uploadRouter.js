@@ -1,6 +1,6 @@
 const express = require('express');
-const authenticate = require('../authenticate');
 const multer = require('multer');
+const authenticate = require('../authenticate');
 const cors = require('./cors');
 
 const fileStorage = multer.diskStorage({

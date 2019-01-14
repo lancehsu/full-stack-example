@@ -113,7 +113,6 @@ export const modifyComment = commentId => async (dispatch, getState) => {
     response = await axios.put(`/dishes/${detailId}/comments/${commentId}`, JSON.stringify({ rating: ratingToAdd, comment: contextToAdd }), {
       headers: { 'Authorization': `bearer ${token}`, 'Content-Type': 'application/json' }
     });
-    console.log(response)
   }
   dispatch(saveComment(response.data.comments));
 };

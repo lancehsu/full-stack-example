@@ -12,6 +12,7 @@ const favoriteSchema = new Schema(
   },
   {
     timestamps: true,
+    usePushEach: true,
   },
 );
 

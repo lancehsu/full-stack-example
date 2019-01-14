@@ -17,6 +17,8 @@ const User = new Schema({
     type: Boolean,
     default: false,
   },
+}, {
+  usePushEach: true,
 });
 
 User.plugin(passportLocalMongoose);
