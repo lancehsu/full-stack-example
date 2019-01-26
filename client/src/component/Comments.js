@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from 'radium';
 import ReactStars from 'react-stars';
 import { color, pointer, commentStyle, commentButtonStyle } from '../style/Style';
 
@@ -50,7 +51,7 @@ const Comments = ({ myId, comments, commentsId, ratings, authorIds, authorNames,
         cancelComment={cancelComment}
       />
     ) : (
-        <div style={{ cursor: pointer.cursor, fontSize: '80%' }} onClick={toAddNewComment}>
+        <div style={{ cursor: pointer.cursor, fontSize: '80%',':hover': { color: color.hoverColor } }} onClick={toAddNewComment}>
           Add a new comment
     </div>
       )}
@@ -75,4 +76,4 @@ const AddComment = ({ ratingToAdd, addRating, contextToAdd, addContext, modifyCo
   </div>
 );
 
-export default Comments;
+export default Radium(Comments);

@@ -13,14 +13,34 @@ export const staffData = (state = null, action) => {
   }
 }
 export const staffName = (state = [], action) => {
-  return action.type === GET_STAFF_NAME ? action.payload : state
+  switch (action.type) {
+    case GET_STAFF_NAME:
+      return action.payload;
+    default:
+      return state;
+  }
 };
-export const staffId = (state = [], action) => (
-  action.type === GET_STAFF_ID ? action.payload : state
-);
-export const staffImg = (state = [], action) => (
-  action.type === GET_STAFF_IMG ? action.payload : state
-)
-export const staffAbbr = (state = [], action) => (
-  action.type === GET_STAFF_ABBR ? action.payload : state
-);
+export const staffId = (state = [], action) => {
+  switch (action.type) {
+    case GET_STAFF_ID:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+export const staffImg = (state = [], action) => {
+  switch (action.type) {
+    case GET_STAFF_IMG:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+export const staffAbbr = (state = [], action) => {
+  switch (action.type) {
+    case GET_STAFF_ABBR:
+      return action.payload;
+    default:
+      return state;
+  }
+};

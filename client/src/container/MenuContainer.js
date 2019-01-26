@@ -5,12 +5,6 @@ import { modifyFavorite } from '../actions/favoritelistActions';
 import Menu from '../component/Menu';
 
 class MenuContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
 
   componentDidMount() {
     this.getMenu();

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { homeScrolling } from '../actions/homeActions';
-import { login, fillUsername, fillPassword, logout, facebookLogin } from '../actions/loginActions';
+import { login, fillUsername, fillPassword, logout } from '../actions/loginActions';
 import Navbar from '../component/Navbar';
 
 class NavbarContainer extends Component {
@@ -10,7 +10,7 @@ class NavbarContainer extends Component {
     // parameters
     const { filledUsername, filledPassword, loginStatus, myFirstname, myLastname, adminVerification } = this.props;
     // functions
-    const { homeScrolling, fillUsername, fillPassword, login, logout, facebookLogin } = this.props;
+    const { homeScrolling, fillUsername, fillPassword, login, logout } = this.props;
     return (
       <Navbar
         handleClick={e => homeScrolling(e.target.id)}
@@ -22,7 +22,6 @@ class NavbarContainer extends Component {
         passValue={filledPassword}
         activeLogin={login}
         activeLogout={logout}
-        responseFacebook={facebookLogin}
         usernameOnChange={e => fillUsername(e.target.value)}
         passwordOnChange={e => fillPassword(e.target.value)}
     />
@@ -43,7 +42,6 @@ const mapDispatchToProp = dispatch => ({
   fillPassword: password => dispatch(fillPassword(password)),
   login: () => dispatch(login()),
   logout: () => dispatch(logout()),
-  facebookLogin: response => dispatch(facebookLogin(response))
 })
 
 export default connect(mapStateToProp, mapDispatchToProp)(NavbarContainer);

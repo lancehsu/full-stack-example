@@ -13,11 +13,26 @@ export const promoData = (state = null, action) => {
   }
 }
 export const promoName = (state = [], action) => {
-  return action.type === GET_PROMO_NAME ? action.payload : state
+  switch (action.type) {
+    case GET_PROMO_NAME:
+      return action.payload;
+    default:
+      return state;
+  }
 };
-export const promoId = (state = [], action) => (
-  action.type === GET_PROMO_ID ? action.payload : state
-);
-export const promoImg = (state = [], action) => (
-  action.type === GET_PROMO_IMG ? action.payload : state
-)
+export const promoId = (state = [], action) => {
+  switch (action.type) {
+    case GET_PROMO_ID:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+export const promoImg = (state = [], action) => {
+  switch (action.type) {
+    case GET_PROMO_IMG:
+      return action.payload;
+    default:
+      return state;
+  }
+};

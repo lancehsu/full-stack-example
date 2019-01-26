@@ -16,12 +16,23 @@ export const GET_MY_ACCOUNT = 'GET_MY_ACCOUNT';
 export const GET_MY_ID = 'GET_MY_ID';
 export const VERIFY_ADMIN = 'VERIFY_ADMIN';
 export const LOG_OUT = 'LOG_OUT';
-export const FACEBOOK_LOGIN = 'FACEBOOK_LOGIN';
+// export const FACEBOOK_LOGIN = 'FACEBOOK_LOGIN';
 export const GET_USERS_FIRSTNAME = 'GET_USERS_FIRSTNAME';
 export const GET_USERS_LASTNAME = 'GET_USERS_LASTNAME';
 export const GET_USERS_ID = 'GET_USERS_ID';
 export const GET_USERS_ACCOUNT = 'GET_USERS_ACCOUNT';
 export const GET_USERS_ADMIN = 'GET_USERS_ADMIN';
+
+export const reloadState = allCookies => async (dispatch, getState) => {
+  
+  const { loginStatus, token } = allCookies;
+  loginStatus && dispatch(getLoginStatus(loginStatus));
+  if (token !== undefined && token.length > 0) {
+    dispatch(getToken(token));
+    await dispatch(fetchMyInfo(token));
+    await dispatch(buildFavoriteList());
+  };
+};
 
 //login stuffs
 export const logout = () => ({
@@ -35,23 +46,7 @@ export const login = () => async (dispatch, getState) => {
       JSON.stringify({ username: filledUsername, password: filledPassword }), {
         headers: { 'content-type': 'application/json' }
       });
-    const { data } = response;
-    alert(data.status);
     dispatch(loginSuccess(response));
-    if (data.success) {
-      dispatch(getToken(data.token));
-      dispatch(getLoginStatus(data.success));
-      await dispatch(fetchMyInfo(data.token));
-
-      let { firstname, lastname, username, _id, admin } = getState().myInfoData.data;
-      
-      dispatch(getMyFirstname(firstname));
-      dispatch(getMyLastname(lastname));
-      dispatch(getMyAccount(username));
-      dispatch(getMyId(_id));
-      dispatch(verifyAdmin(admin));
-      await dispatch(buildFavoriteList());
-    };
   } catch (err) {
     console.error(err);
     dispatch(loginFailed(err));
@@ -68,10 +63,24 @@ export const fillPassword = password => ({
 const loginPending = () => ({
   type: LOGIN_PENDING
 });
-const loginSuccess = data => ({
-  type: LOGIN_SUCCESS,
-  payload: data
-});
+const loginSuccess = response => async dispatch => {
+  const { data } = response;
+  alert(data.status);
+  if (data.success) {
+    const { token } = data;
+    dispatch(getToken(token));
+    dispatch(getLoginStatus(data.success));
+    dispatch(fillUsername(''));
+    dispatch(fillPassword(''));
+
+    await dispatch(fetchMyInfo(token));
+    await dispatch(buildFavoriteList());
+    return {
+      type: LOGIN_SUCCESS,
+      payload: data
+    }
+  }
+};
 const loginFailed = err => (dispatch, getState) => {
   const { filledUsername, filledPassword } = getState();
   if (filledUsername === '') {
@@ -106,12 +115,20 @@ const fetchMyInfoResponse = data => ({
   type: FETCH_MY_INFO_RESPONSE,
   payload: data
 });
-const fetchMyInfo = token => async dispatch => {
+export const fetchMyInfo = token => async dispatch => {
   dispatch(fetchMyInfoPending());
   const response = await axios.get('/users/me', {
     headers: { 'Authorization': `bearer ${token}` }
   });
   dispatch(fetchMyInfoResponse(response));
+
+  let { firstname, lastname, username, _id, admin } = response.data;
+  dispatch(getMyFirstname(firstname));
+  dispatch(getMyLastname(lastname));
+  dispatch(getMyAccount(username));
+  dispatch(getMyId(_id));
+  dispatch(verifyAdmin(admin));
+  await dispatch(buildFavoriteList());
 };
 
 const getMyFirstname = firstname => ({
@@ -143,43 +160,43 @@ export const verifyAdmin = admin => (dispatch, getState) => {
   })
 };
 
-export const facebookLogin = fbResponse => async (dispatch) => {
-  try {
-    const { name, id, accessToken } = fbResponse;
-    const response = await axios.get('users/facebook/token', {
-      headers: { 'Authorization': `Bearer ${accessToken}` }
-    });
-    const { data } = response;
-    if (data.success) {
-      alert(data.status);
-      const nameArray = name.split(' ');
-      let firstname, lastname;
-      if (nameArray.length === 2) {
-        // English name
-        firstname = nameArray[0];
-        lastname = nameArray[1];
-      } else if (nameArray.length === 1) {
-        // Chinese name
-        firstname = nameArray[0].slice(1);
-        lastname = nameArray[0][0];
-      } else {
-        // others
-        firstname = nameArray[0];
-        lastname = nameArray[nameArray.length - 1];
-      }
+// export const facebookLogin = fbResponse => async (dispatch) => {
+//   try {
+//     const { name, id, accessToken } = fbResponse;
+//     const response = await axios.get('users/facebook/token', {
+//       headers: { 'Authorization': `Bearer ${accessToken}` }
+//     });
+//     const { data } = response;
+//     if (data.success) {
+//       alert(data.status);
+//       const nameArray = name.split(' ');
+//       let firstname, lastname;
+//       if (nameArray.length === 2) {
+//         // English name
+//         firstname = nameArray[0];
+//         lastname = nameArray[1];
+//       } else if (nameArray.length === 1) {
+//         // Chinese name
+//         firstname = nameArray[0].slice(1);
+//         lastname = nameArray[0][0];
+//       } else {
+//         // others
+//         firstname = nameArray[0];
+//         lastname = nameArray[nameArray.length - 1];
+//       }
 
-      dispatch(getLoginStatus(data.success));
-      dispatch(getMyFirstname(firstname));
-      dispatch(getMyLastname(lastname));
-      dispatch(getMyAccount(name));
-      dispatch(getToken(data.token));
-      dispatch(getMyId(id));
-    }
-  } catch (err) {
-    console.error(err);
-    alert(err);
-  }
-};
+//       dispatch(getLoginStatus(data.success));
+//       dispatch(getMyFirstname(firstname));
+//       dispatch(getMyLastname(lastname));
+//       dispatch(getMyAccount(name));
+//       dispatch(getToken(data.token));
+//       dispatch(getMyId(id));
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     alert(err);
+//   }
+// };
 export const getUsersFirstname = firstnames => ({
   type: GET_USERS_FIRSTNAME,
   payload: firstnames

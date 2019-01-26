@@ -2,14 +2,24 @@ import {
   FILL_USERNAME, FILL_PASSWORD, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAILED,
   GET_LOGIN_STATUS, GET_TOKEN, FETCH_MY_INFO_PENDING, FETCH_MY_INFO_RESPONSE,
   GET_MY_FIRSTNAME, GET_MY_LASTNAME, GET_MY_ACCOUNT, GET_MY_ID, VERIFY_ADMIN,
-  LOG_OUT, GET_USERS_FIRSTNAME,GET_USERS_LASTNAME, GET_USERS_ACCOUNT, GET_USERS_ID, GET_USERS_ADMIN
+  LOG_OUT, GET_USERS_FIRSTNAME, GET_USERS_LASTNAME, GET_USERS_ACCOUNT, GET_USERS_ID, GET_USERS_ADMIN
 } from '../actions/loginActions';
 
 export const filledUsername = (state = '', action) => {
-  return action.type === FILL_USERNAME ? action.payload : state;
+  switch (action.type) {
+    case FILL_USERNAME:
+      return action.payload;
+    default:
+      return state;
+  }
 }
 export const filledPassword = (state = '', action) => {
-  return action.type === FILL_PASSWORD ? action.payload : state;
+  switch (action.type) {
+    case FILL_PASSWORD:
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 export const loginResponse = (state = null, action) => {
@@ -30,7 +40,8 @@ export const loginResponse = (state = null, action) => {
 export const loginStatus = (state = false, action) => {
   switch (action.type) {
     case GET_LOGIN_STATUS:
-    console.log('login!');
+      console.log('login!');
+      console.log(action.payload);
       return action.payload;
     case LOG_OUT:
       console.log('logout!')

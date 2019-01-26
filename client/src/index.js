@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { CookiesProvider } from 'react-cookie';
 import './style/index.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
@@ -14,11 +15,13 @@ const store = createStore(reducers, applyMiddleware(thunk));
 
 render((
   <HttpsRedirect>
-    <Provider store={store}>
+    <CookiesProvider>
       <BrowserRouter>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </BrowserRouter>
-    </Provider>
+    </CookiesProvider>
   </HttpsRedirect>
 ),
   document.getElementById('root'));

@@ -55,6 +55,7 @@ export const getCommentsAuthorName = () => (dispatch, getState) => {
     payload: authors.map(e => `${e.firstname} ${e.lastname}`)
   })
 };
+
 export const toAddNewComment = () => (dispatch, getState) => {
   const { loginStatus } = getState();
   loginStatus ? dispatch({ type: TO_ADD_NEW_COMMENT, payload: '' }) : alert('Please login!');

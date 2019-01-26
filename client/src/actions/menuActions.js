@@ -3,6 +3,7 @@ import axios from 'axios';
 export const FETCH_MENU_PENDING = 'FETCH_MENU_PENDING';
 export const FETCH_MENU_SUCCESS = 'FETCH_MENU_SUCCESS';
 export const FETCH_MENU_FAILED = 'FETCH_MENU_FAILED';
+// export const GET_MENU_MEAN_RATING = 'GET_MENU_MEAN_RATING';
 export const GET_MENU_NAME = 'GET_MENU_NAME';
 export const GET_MENU_ID = 'GET_MENU_ID';
 export const GET_MENU_IMG = 'GET_MENU_IMG';
@@ -32,6 +33,15 @@ export const fetchMenu = () => async dispatch => {
     dispatch(fetchMenuFailed(err));
   }
 };
+// export const getMenuMeanRating = () => (dispatch, getState) => {
+//   const { data } = getState().menuData;
+//   const menuMeanRating = data.map(e => Math.round(e.comments.reduce((a, b) => a + b.rating, 0)* 10/ e.comments.length)/10);
+//   console.log(menuMeanRating);
+//   dispatch({
+//     type: GET_MENU_MEAN_RATING,
+//     payload: 1
+//   })
+// };
 
 export const getMenuName = () => (dispatch, getState) => {
   const { data } = getState().menuData;

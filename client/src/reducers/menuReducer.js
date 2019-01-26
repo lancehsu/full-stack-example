@@ -15,9 +15,14 @@ export const menuData = (state = null, action) => {
     default:
       return state;
   }
-}
+};
 export const menuName = (state = [], action) => {
-  return action.type === GET_MENU_NAME ? action.payload : state;
+  switch (action.type) {
+    case GET_MENU_NAME:
+      return action.payload;
+    default:
+      return state;
+  }
 };
 export const menuId = (state = [], action) => {
   switch (action.type) {
@@ -27,18 +32,43 @@ export const menuId = (state = [], action) => {
       return state;
   }
 };
-export const menuImg = (state = [], action) => (
-  action.type === GET_MENU_IMG ? action.payload : state
-);
-export const menuCategory = (state = null, action) => (
-  action.type === GET_MENU_CATEGORY ? action.payload : state
-);
-export const menuAmount = (state = 0, action) => (
-  action.type === GET_MENU_AMOUNT ? action.payload : state
-);
+export const menuImg = (state = [], action) => {
+  switch (action.type) {
+    case GET_MENU_IMG:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+export const menuCategory = (state = null, action) => {
+  switch (action.type) {
+    case GET_MENU_CATEGORY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+export const menuAmount = (state = 0, action) => {
+  switch (action.type) {
+    case GET_MENU_AMOUNT:
+    return action.payload;
+    default:
+    return state;
+  }
+};
 export const options = (state = [], action) => {
-  return action.type === ADD_OPTIONS ? action.payload : state;
+  switch (action.type) {
+    case ADD_OPTIONS:
+    return action.payload;
+    default:
+    return state;
+  }
 };
 export const selectedOption = (state = null, action) => {
-  return action.type === SELECT_ON_CHANGE ? action.payload : state;
+  switch (action.type) {
+    case SELECT_ON_CHANGE:
+    return action.payload;
+    default:
+    return state;
+  }
 };
