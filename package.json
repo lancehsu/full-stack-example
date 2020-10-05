@@ -22,7 +22,7 @@
   "author": "Lance Hsu",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^4.0.1",
+    "concurrently": "^5.3.0",
     "express": "^4.16.4"
   }
 }

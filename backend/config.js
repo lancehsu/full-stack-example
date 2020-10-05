@@ -1,8 +1,9 @@
 module.exports = {
-  secretKey: '12345-67890-09876-54321',
-  mongoUrl: 'mongodb://exercise:exercise123@ds145484.mlab.com:45484/full-stack-exercise',
+  secretKey: "12345-67890-09876-54321",
+  mongoUrl:
+    "mongodb+srv://exercise:exercise@full-stack-exercise.cism1.mongodb.net/full-stack-exercise?retryWrites=true&w=majority",
   facebook: {
-    clientId: '',
-    clientSecret: '',
+    clientId: "",
+    clientSecret: "",
   },
 };
