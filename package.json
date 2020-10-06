@@ -9,8 +9,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "setup": "npm install && cd ../client && npm install && cd ..",
-    "dev": "concurrently \"npm start\" \"cd client && npm start\"",
     "build": "cd ./client && npm install && npm run build && cp -r build/* ../build/",
     "start": "node ./bin/www"
   },
@@ -26,12 +24,11 @@
     "MongoDB"
   ],
   "dependencies": {
-    "concurrently": "^5.3.0",
-    "express": "^4.16.4",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "express": "^4.16.4",
     "express-session": "^1.15.6",
     "helmet": "^3.23.3",
     "http-errors": "~1.6.2",
