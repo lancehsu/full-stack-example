@@ -30,7 +30,7 @@ const connect = mongoose.connect(url, {
 
 connect.then(
   (db) => {
-    console.log('Connected correctly to server');
+    console.log(`Connected correctly to server ${process.env.PORT}`);
   },
   (err) => console.error(err)
 );
@@ -43,18 +43,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve('./') + '/build/index.html');
-// });
-
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(compression());
 app.use(helmet());
-
-// app.use(express.static(path.resolve('./') + '/build'));
 
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);

@@ -1,22 +1,22 @@
-const express = require("express");
-const Dishes = require("../models/dishes");
-const authenticate = require("../authenticate");
-const cors = require("./cors");
+const express = require('express');
+const Dishes = require('../models/dishes');
+const authenticate = require('../authenticate');
+const cors = require('./cors');
 
 const dishRouter = express.Router();
 
 dishRouter.use(express.json());
 
 dishRouter
-  .route("/")
+  .route('/')
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   })
   .get(cors.cors, async (req, res, next) => {
     try {
-      const dishes = await Dishes.find(req.query).populate("comments.author");
+      const dishes = await Dishes.find(req.query).populate('comments.author');
       res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader('Content-Type', 'application/json');
       res.json(dishes);
     } catch (err) {
       next(err);
@@ -30,7 +30,7 @@ dishRouter
       try {
         const dish = await Dishes.create(req.body);
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(dish);
       } catch (err) {
         next(err);
@@ -43,7 +43,7 @@ dishRouter
     authenticate.verifyAdmin,
     (req, res) => {
       res.statusCode = 403;
-      res.end("PUT operation not supported on /dishes");
+      res.end('PUT operation not supported on /dishes');
     }
   )
   .delete(
@@ -54,7 +54,7 @@ dishRouter
       try {
         const resp = await Dishes.remove({});
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(resp);
       } catch (err) {
         next(err);
@@ -63,17 +63,17 @@ dishRouter
   );
 
 dishRouter
-  .route("/:dishId")
+  .route('/:dishId')
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   })
   .get(cors.cors, async (req, res, next) => {
     try {
       const dish = await Dishes.findById(req.params.dishId).populate(
-        "comments.author"
+        'comments.author'
       );
       res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader('Content-Type', 'application/json');
       res.json(dish);
     } catch (err) {
       next(err);
@@ -98,9 +98,9 @@ dishRouter
           req.params.dishId,
           { $set: req.body },
           { new: true }
-        ).populate("comments.author");
+        ).populate('comments.author');
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(dish);
       } catch (err) {
         next(err);
@@ -115,7 +115,7 @@ dishRouter
       try {
         const resp = await Dishes.findByIdAndRemove(req.params.dishId);
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(resp);
       } catch (err) {
         next(err);
@@ -124,14 +124,14 @@ dishRouter
   );
 
 dishRouter
-  .route("/:dishId/comments")
+  .route('/:dishId/comments')
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   })
   .get(cors.cors, async (req, res, next) => {
     try {
       const dish = await Dishes.findById(req.params.dishId).populate(
-        "comments.author"
+        'comments.author'
       );
       if (!dish) {
         const err = new Error(`Dish ${req.params.dishId} not found`);
@@ -140,7 +140,7 @@ dishRouter
         return;
       }
       res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader('Content-Type', 'application/json');
       res.json(dish.comments);
     } catch (err) {
       next(err);
@@ -162,9 +162,9 @@ dishRouter
         req.body.author = req.user.id;
         dish.comments.push(req.body);
         await dish.save();
-        const resp = await Dishes.findById(dish.id).populate("comments.author");
+        const resp = await Dishes.findById(dish.id).populate('comments.author');
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(resp);
       } catch (err) {
         next(err);
@@ -197,7 +197,7 @@ dishRouter
         // }
         await dish.save();
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(dish);
       } catch (err) {
         next(err);
@@ -206,14 +206,14 @@ dishRouter
   );
 
 dishRouter
-  .route("/:dishId/comments/:commentId")
+  .route('/:dishId/comments/:commentId')
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   })
   .get(cors.cors, async (req, res, next) => {
     try {
       const dish = await Dishes.findById(req.params.dishId).populate(
-        "comments.author"
+        'comments.author'
       );
       if (!dish) {
         const err = new Error(`Dish ${req.params.dishId} not found`);
@@ -228,7 +228,7 @@ dishRouter
         return;
       }
       res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader('Content-Type', 'application/json');
       res.json(dish.comments.id(req.params.commentId));
     } catch (err) {
       next(err);
@@ -258,9 +258,9 @@ dishRouter
           return;
         }
         await modifyComment(req, dish);
-        const resp = await Dishes.findById(dish.id).populate("comments.author");
+        const resp = await Dishes.findById(dish.id).populate('comments.author');
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(resp);
       } catch (err) {
         next(err);
@@ -287,9 +287,9 @@ dishRouter
         }
 
         await deleteComment(req, dish);
-        const resp = await Dishes.findById(dish.id).populate("comments.author");
+        const resp = await Dishes.findById(dish.id).populate('comments.author');
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader('Content-Type', 'application/json');
         res.json(resp);
       } catch (err) {
         next(err);
@@ -304,7 +304,7 @@ const modifyComment = (req, dish) =>
       JSON.stringify(req.user.id) !==
       JSON.stringify(dish.comments.id(req.params.commentId).author)
     ) {
-      const err = new Error("unauthorization");
+      const err = new Error('unauthorization');
       err.status = 401;
       reject(err);
       return;
@@ -330,7 +330,7 @@ const deleteComment = (req, dish) =>
         JSON.stringify(dish.comments.id(req.params.commentId).author)
     ) {
       const err = new Error(
-        "You are not authorized to perform this operation!"
+        'You are not authorized to perform this operation!'
       );
       err.status = 401;
       reject(err);
