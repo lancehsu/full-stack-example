@@ -18,7 +18,7 @@ class App extends Component {
     const { reloadState } = props;
 
     reloadState(allCookies);
-    for (let [key, value] of Object.entries(allCookies)) {
+    for (let key of Object.keys(allCookies)) {
       cookies.remove(key);
     }
   }
@@ -28,7 +28,7 @@ class App extends Component {
   componentWillUnmount() {
     const { cookies } = this.props;
     const allCookies = cookies.getAll();
-    for (let key of Object.entries(allCookies)) {
+    for (let key of Object.keys(allCookies)) {
       cookies.remove(key);
     }
     window.removeEventListener('beforeunload', this.saveState);
@@ -40,7 +40,7 @@ class App extends Component {
     for (let [key, value] of Object.entries(state)) {
       if (key === 'loginStatus' && value === false) {
         const allCookies = cookies.getAll();
-        for (let [key, value] of Object.entries(allCookies)) {
+        for (let key of Object.keys(allCookies)) {
           cookies.remove(key);
         }
         break;
@@ -48,21 +48,21 @@ class App extends Component {
       key === 'loginStatus' && cookies.set(key, value);
       key === 'token' && cookies.set(key, value);
     }
-    }
-
-    render() {
-      return (
-        <div className='App'>
-          <NavbarContainer />
-          <Main />
-        </div>
-      );
-    }
   }
-  const mapStateToProp = state => ({
-    state
-  });
-  const mapDispatchToProp = dispatch => ({
-    reloadState: allCookies => dispatch(reloadState(allCookies))
-  });
-  export default withCookies(connect(mapStateToProp, mapDispatchToProp)(App));
+
+  render() {
+    return (
+      <div className='App'>
+        <NavbarContainer />
+        <Main />
+      </div>
+    );
+  }
+}
+const mapStateToProp = state => ({
+  state
+});
+const mapDispatchToProp = dispatch => ({
+  reloadState: allCookies => dispatch(reloadState(allCookies))
+});
+export default withCookies(connect(mapStateToProp, mapDispatchToProp)(App));

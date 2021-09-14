@@ -29,5 +29,5 @@ const leaderSchema = new Schema({
   usePushEach: true,
 });
 
-const Leaders = mongoose.model('leader', leaderSchema);
+const Leaders = mongoose.model('Leader', leaderSchema);
 module.exports = Leaders;
