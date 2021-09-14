@@ -13,7 +13,6 @@
 npm run build
 ```
 ### Start
-then
 ```zsh
 npm start
 ```
