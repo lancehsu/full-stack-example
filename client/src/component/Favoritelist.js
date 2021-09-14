@@ -4,7 +4,7 @@ import Radium from 'radium';
 import { pageStyle, pageItemImgStyle, pageContainerStyle, pageItemStyle, pageItemNameStyle, heartCheckboxStyle } from '../style/Style';
 
 const fallbackImg = '/images/empty-dish.jpg';
-const Favoritelist = ({ ids, names,imgs, checked, modifyFavorite }) => {
+const Favoritelist = ({ ids, names, imgs, checked, modifyFavorite }) => {
   return (
     <div className='Favorites' style={pageStyle}>
       <div className='title'>

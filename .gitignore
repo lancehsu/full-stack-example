@@ -2,11 +2,10 @@
 
 # dependencies
 node_modules
-.pnp
-.pnp.js
 client/build
 build/*
 !build/index.html
+.env
 
 # testing
 coverage

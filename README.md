@@ -6,15 +6,18 @@
 
 ## Usage
 
-Install all dependencies
+### Install all dependencies
 
 ```zsh
 npm install
 npm build
 ```
 
+### Config setting
+1. Copy `.env.example` and rename it to `.env`
+2. Add `SECRET_KEY` for JWT token and `MONGO_URL`
+### Start
 then
-
 ```zsh
 npm start
 ```

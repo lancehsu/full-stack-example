@@ -23,7 +23,7 @@ const fetchFavoriteFailed = err => ({
   type: FETCH_FAVORITE_FAILED,
   payload: err
 });
-export const fetchFavorite =  () => async (dispatch, getState) => {
+export const fetchFavorite = () => async (dispatch, getState) => {
   dispatch(fetchFavoritePending());
   try {
     const { token } = getState();
@@ -86,7 +86,7 @@ export const getFavoriteAmount = () => (dispatch, getState) => {
 
 export const buildFavoriteList = () => async (dispatch, getState) => {
   try {
-    
+
     await dispatch(fetchFavorite());
     dispatch(getFavoriteId());
     dispatch(getFavoriteImg());
@@ -103,7 +103,7 @@ export const buildFavoriteList = () => async (dispatch, getState) => {
     const list = menuId.map(id => ({ id, liked: favoriteId.includes(id) }));
     dispatch({
       type: BUILD_FAVORITELIST,
-      payload: list 
+      payload: list
     });
     console.log('Favorite List is built')
   } catch (err) {
@@ -114,7 +114,7 @@ const addFavorite = id => async (dispatch, getState) => {
   try {
     const { token } = getState();
     // add "../" to avoid to access /menu/favorites/${id}
-    const response = await axios.post(`../favorites/${id}`,{}, {
+    const response = await axios.post(`../favorites/${id}`, {}, {
       headers: { 'Authorization': `bearer ${token}` }
     });
     console.log('add');

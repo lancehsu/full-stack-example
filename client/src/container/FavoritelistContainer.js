@@ -7,7 +7,7 @@ import Favoritelist from '../component/Favoritelist';
 class FavoritelistContainer extends Component {
 
   componentWillMount() {
-    
+
     const { loginStatus } = this.props;
     !loginStatus && alert('Login first!!!');
   }

@@ -1,7 +1,8 @@
+require('dotenv').config()
+
 module.exports = {
-  secretKey: '12345-67890-09876-54321',
-  mongoUrl:
-    'mongodb+srv://develop:develop@full-stack-exercise.cism1.mongodb.net/full-stack-exercise?retryWrites=true&w=majority',
+  secretKey: process.env.SECRET_KEY,
+  mongoUrl: process.env.MONGO_URL,
   facebook: {
     clientId: '',
     clientSecret: '',
