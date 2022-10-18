@@ -2,7 +2,7 @@
 
 > A demo of full stack application with React-Redux front-end, Node Express back-end and MongoDB database.
 
-→ [Online demo](https://full-stack-example-demo.herokuapp.com/)
+→ [Online demo](https://glowing-pie-b74ab4.netlify.app/)
 
 ## Usage
 ### Config setting
