@@ -34,7 +34,7 @@
     "helmet": "^4.1.1",
     "http-errors": "^1.8.0",
     "install": "^0.13.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.13.9",
     "mongoose-currency": "^0.2.0",
     "morgan": "^1.10.0",
